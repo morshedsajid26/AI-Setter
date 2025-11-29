@@ -21,7 +21,7 @@ import logout from "@/public/logout.png";
 const navitems = [
   {
     name: "Dashboard",
-    link: "/staff/customer/platform",
+    link: "/dashboard",
     icon: LuLayoutDashboard,
   },
   {
