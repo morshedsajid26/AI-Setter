@@ -1,6 +1,12 @@
 import Bredcumb from "@/src/components/Bredcumb";
 import React from "react";
 import { FaPlus } from "react-icons/fa";
+import { LuMessageSquare } from "react-icons/lu";
+import { GoArrowDownRight, GoArrowUpRight } from "react-icons/go";
+import { FiUsers } from "react-icons/fi";
+import { IoCalendarOutline } from "react-icons/io5";
+import MessageVolumeChart from "@/src/components/MessageVolumeChart";
+import WeeklyBookingBar from "@/src/components/WeeklyBooking";
 
 const Dashboard = () => {
   return (
@@ -20,18 +26,78 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-5">
-        <div className="bg-[#FFFFFF] rounded-lg col-span-3">1</div>
-        <div className="bg-[#FFFFFF] rounded-lg col-span-3">1</div>
-        <div className="bg-[#FFFFFF] rounded-lg col-span-3">1</div>
-        <div className="bg-[#FFFFFF] rounded-lg col-span-3">1</div>
+      <div className="grid grid-cols-12 gap-5 mt-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+          <div className="flex items-center justify-between">
+            <p className="font-inter ">Total Messages</p>
+            <LuMessageSquare className="w-6 h-6" />
+          </div>
+          <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
+            1,200
+          </p>
+          <div className="flex items-center gap-1 mt-2">
+            <GoArrowUpRight className=" text-[#00A63E]" />
+            <p className="font-inter text-[#00A63E]">12%</p>
+          </div>
+        </div>
 
-        <div className="bg-[#FFFFFF] rounded-lg col-span-6">1</div>
-        <div className="bg-[#FFFFFF] rounded-lg col-span-6">1</div>
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+          <div className="flex items-center justify-between">
+            <p className="font-inter ">Leads Identified</p>
+            <FiUsers className="w-6 h-6" />
+          </div>
+          <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
+            20
+          </p>
+          <div className="flex items-center gap-1 mt-2">
+            <GoArrowUpRight className=" text-[#00A63E]" />
+            <p className="font-inter text-[#00A63E]">8%</p>
+          </div>
+        </div>
+
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+          <div className="flex items-center justify-between">
+            <p className="font-inter ">Bookings</p>
+            <IoCalendarOutline className="w-6 h-6" />
+          </div>
+          <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
+           53
+          </p>
+          <div className="flex items-center gap-1 mt-2">
+            <GoArrowUpRight className=" text-[#00A63E]" />
+            <p className="font-inter text-[#00A63E]">18%</p>
+          </div>
+        </div>
+
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+          <div className="flex items-center justify-between">
+            <p className="font-inter ">Conversion Rate</p>
+            <IoCalendarOutline className="w-6 h-6" />
+          </div>
+          <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
+            1,200
+          </p>
+          <div className="flex items-center gap-1 mt-2">
+            <GoArrowDownRight className=" text-[#E7000B]" />
+            <p className="font-inter text-[#E7000B]">12%</p>
+          </div>
+        </div>
+
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 p-4">
+          <p className="font-inter text-[#0A0A0A]">Message Volume</p>
+          <p className="font-inter text-[#717182] mt-1 mb-8"> Messages received over the last 7 days</p>
+
+          <MessageVolumeChart />
+        </div>
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 p-4">
+          <p className="font-inter text-[#0A0A0A]">Bookings Over Time</p>
+          <p className="font-inter text-[#717182] mt-1 mb-8"> Weekly booking trends this month</p>
+
+          <WeeklyBookingBar/>
+        </div>
 
         <div className="bg-[#FFFFFF] rounded-lg col-span-8">1</div>
         <div className="col-span-4">
-            
           <div className="bg-[#FFFFFF] rounded-lg ">1</div>
           <div className="bg-[#FFFFFF] rounded-lg ">1</div>
         </div>
