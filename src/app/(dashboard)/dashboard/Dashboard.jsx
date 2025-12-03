@@ -7,6 +7,9 @@ import { FiUsers } from "react-icons/fi";
 import { IoCalendarOutline } from "react-icons/io5";
 import MessageVolumeChart from "@/src/components/MessageVolumeChart";
 import WeeklyBookingBar from "@/src/components/WeeklyBooking";
+import RecentActivity from "@/src/components/RecentActivity";
+import { SiTicktick } from "react-icons/si";
+import ChannelConnect from "@/src/components/ChannelConnect";
 
 const Dashboard = () => {
   return (
@@ -96,10 +99,32 @@ const Dashboard = () => {
           <WeeklyBookingBar/>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-lg col-span-8">1</div>
-        <div className="col-span-4">
-          <div className="bg-[#FFFFFF] rounded-lg ">1</div>
-          <div className="bg-[#FFFFFF] rounded-lg ">1</div>
+        <div className="bg-[#FFFFFF] rounded-lg col-span-8 p-4">
+          <RecentActivity />
+        </div>
+        <div className="col-span-4 ">
+          <div className="bg-[#FFFFFF] rounded-lg p-6">
+
+            <ChannelConnect/>
+          </div>
+
+
+          <div className="bg-[#FFFFFF] rounded-lg mt-5 p-6">
+            <p className="font-inter text-[#0A0A0A]">
+              Quick Actions
+            </p>
+
+            <div>
+              <button className="font-inter text-[#0A0A0A] mt-7 w-full border border-gray-300 rounded-lg px-3 py-2 text-left flex items-center gap-2 cursor-pointer">
+                <SiTicktick className="w-4 h-4" />
+                Reconnect HubSpot
+              </button>
+              <button className="font-inter text-[#0A0A0A] mt-4 w-full border border-gray-300 rounded-lg px-3 py-2 text-left flex items-center gap-2 cursor-pointer">
+                <FiUsers className="w-4 h-4" />
+                Export Leads CSV
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

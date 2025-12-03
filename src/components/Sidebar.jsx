@@ -26,7 +26,7 @@ const navitems = [
   },
   {
     name: "Conversations",
-    link: "/staff/redeem/add",
+    link: "/conversations",
     icon: IoChatbubbleEllipsesOutline,
   },
   {
