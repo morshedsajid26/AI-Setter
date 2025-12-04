@@ -47,7 +47,7 @@ export default function WeeklyBookingBar() {
 
           <Bar
             dataKey="value"
-            fill="#8b5cf6"
+            fill="#900616"
             radius={[6, 6, 0, 0]} // ROUNDED TOP
             barSize={95} // SAME WIDTH FEELING
           />

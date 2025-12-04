@@ -14,8 +14,7 @@ import { MdOutlineAnalytics } from "react-icons/md";
 import { LuPlug } from "react-icons/lu";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineSupportAgent } from "react-icons/md";
-// import { FiLogOut } from "react-icons/fi";
+import logo from "@/public/logo.png";
 import logout from "@/public/logout.png";
 
 const navitems = [
@@ -74,7 +73,7 @@ const Sidebar = () => {
     <>
       {/* 🔹 Toggle Button (visible on small screens) */}
       <button
-        className="2xl:hidden fixed top-5 left-5 z-50 p-2 bg-[#7008E7] text-white rounded-lg cursor-pointer"
+        className="2xl:hidden fixed top-5 left-5 z-50 p-2 bg-[#900616] text-white rounded-lg cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -88,8 +87,8 @@ const Sidebar = () => {
       >
         {/* Logo */}
         <div className="flex justify-center ">
-          {/* <Image src={logo} alt="logo" /> */}
-          <h3 className="font-inter text-[32px] font-bold">LOGO</h3>
+          <Image src={logo} alt="logo" />
+          {/* <h3 className="font-inter text-[32px] font-bold">LOGO</h3> */}
         </div>
 
         {/* Nav Items */}
@@ -106,8 +105,8 @@ const Sidebar = () => {
                 onClick={() => setIsOpen(false)} // auto close on mobile
                 className={`py-2 px-2 font-inter font-medium flex items-center gap-4 cursor-pointer rounded-lg transition-all duration-200 ${
                   isActive
-                    ? "bg-[#D3CAFF] text-[#7008E7]"
-                    : "text-[#000000] hover:bg-[#D3CAFF] hover:text-[#7008E7]"
+                    ? "bg-[#900616] text-white"
+                    : "text-[#000000] hover:bg-[#900616] hover:text-white"
                 }`}
               >
                 <Icon
@@ -127,8 +126,8 @@ const Sidebar = () => {
         {/* Logout */}
         <div className="">
           <Link href="/staff/login">
-            <button className="flex items-center gap-4 py-2 px-2 w-full text-[#FF1100] hover:bg-[#D3CAFF] font-inter font-medium cursor-pointer rounded-lg transition-all duration-200">
-              <Image src={logout} alt="log out" className="w-6 h-6" />
+            <button className="flex items-center gap-4 py-2 px-2 w-full text-[#FF1100] hover:text-white hover:bg-[#900616] font-inter font-medium cursor-pointer rounded-lg transition-all duration-200 group">
+              <Image src={logout} alt="log out" className="w-6 h-6 group-hover:invert" />
               Log Out
             </button>
           </Link>

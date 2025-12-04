@@ -22,7 +22,7 @@ const Dashboard = () => {
           </p>
         </div>
         <div>
-          <button className="bg-linear-to-l from-[#9810FA] to-[#7F22FE] text-white px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2 cursor-pointer">
+          <button className="bg-[#900616] text-white px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2 cursor-pointer">
             <FaPlus />
             Connect Channel
           </button>

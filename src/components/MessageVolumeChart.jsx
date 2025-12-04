@@ -32,9 +32,9 @@ export default function MessageVolumeChart() {
           <Line
             type="monotone"
             dataKey="value"
-            stroke="#8b5cf6"
+            stroke="#900616"
             strokeWidth={3}
-            dot={{ r: 5, fill: "#8b5cf6", strokeWidth: 2 }}
+            dot={{ r: 5, fill: "#900616", strokeWidth: 2 }}
             activeDot={{ r: 6 }}
           />
         </LineChart>
