@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
 import { FiMail, FiPhone, FiMapPin, FiBriefcase } from "react-icons/fi";
-import { FaUser } from "react-icons/fa";
+import {  FaUser } from "react-icons/fa";
+import { AiOutlineExport } from "react-icons/ai";
+import { FiCalendar } from "react-icons/fi";
 
 export default function ActiveLeads({ data }) {
   if (!data) {
@@ -121,10 +123,11 @@ export default function ActiveLeads({ data }) {
       {/* BUTTONS */}
       <div className="space-y-3 pt-4">
         <button className="w-full bg-[#900616] text-white py-3 rounded-lg flex items-center justify-center gap-2 font-medium">
-          <span>↗</span> Sync to HubSpot
+          <AiOutlineExport className='h-6 w-6' /> Sync to HubSpot
         </button>
 
-        <button className="w-full border py-3 rounded-lg font-medium text-[#0F172A]">
+        <button className="w-full border py-3 rounded-lg font-medium text-[#0F172A] flex items-center justify-center gap-2">
+          <FiCalendar className="w-6 h-6"/>
           Book Meeting
         </button>
       </div>

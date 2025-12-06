@@ -30,12 +30,12 @@ const navitems = [
   },
   {
     name: "Leads",
-    link: "/staff/transaction",
+    link: "/leads",
     icon: FiUsers ,
   },
   {
     name: "Calendar",
-    link: "/staff/push/notification",
+    link: "/calendar",
     icon: IoCalendarOutline,
   },
   {

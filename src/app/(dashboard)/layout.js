@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 const layout = ({ children }) => {
   const pathname = usePathname();
   const isConversationPage = pathname === "/conversations";
+    const isCalendarpage = pathname === "/calendar";
 
   return (
     <div className='bg-[#EAEAEA]'>
@@ -23,8 +24,8 @@ const layout = ({ children }) => {
           <main
             className={
               `
-              flex-1 min-h-0 p-2
-              ${isConversationPage
+              flex-1 min-h-0 p-4
+              ${isConversationPage|| isCalendarpage
                 ? "overflow-hidden "   // ❗ NO SCROLL + FIXED
                 : "overflow-y-auto hide-scrollbar p-5"  // default scroll
               }
@@ -35,7 +36,7 @@ const layout = ({ children }) => {
               className={
                 `
                 w-full max-w-full
-                ${isConversationPage
+                ${isConversationPage || isCalendarpage
                   ? "overflow-hidden h-full "   // child won't scroll
                   : "overflow-x-hidden "
                 }
