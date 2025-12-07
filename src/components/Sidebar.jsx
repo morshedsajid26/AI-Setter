@@ -50,7 +50,7 @@ const navitems = [
   },
   {
     name: "API & Integration",
-    link: "/staff/profile",
+    link: "/integrations",
     icon: LuPlug,
   },
   {
