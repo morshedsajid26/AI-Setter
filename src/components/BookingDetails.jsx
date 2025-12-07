@@ -39,7 +39,7 @@ export default function BookingDetails({ booking }) {
       <h2 className="text-lg font-medium mb-4">Booking Details</h2>
 
       {/* CLIENT */}
-       <p className="text-[#45556C] mb-2">Client</p>
+      <p className="text-[#45556C] mb-2">Client</p>
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 bg-[#BE0016] text-white rounded-full flex items-center justify-center">
           {initials}
@@ -106,9 +106,7 @@ export default function BookingDetails({ booking }) {
         Join Meeting
       </button>
 
-      <button className="w-full py-3 border rounded-lg mb-3">
-        Reschedule
-      </button>
+      <button className="w-full py-3 border rounded-lg mb-3">Reschedule</button>
 
       <button className="w-full py-3  text-[#C10007] font-medium">
         Cancel Booking

@@ -23,7 +23,7 @@ const ChannelConnect = () => {
       id: 2,
       type: "facebook",
       title: "Facebook",
-     subtitle: "Not connected",
+      subtitle: "Not connected",
       status: "inactive",
       bg: "bg-blue-50",
       border: "border-blue-200",
@@ -68,8 +68,12 @@ const ChannelConnect = () => {
             {ICONS[item.type]}
 
             <div>
-              <p className="font-semibold font-inter text-gray-700">{item.title}</p>
-              <p className="text-sm font-inter text-gray-500">{item.subtitle}</p>
+              <p className="font-semibold font-inter text-gray-700">
+                {item.title}
+              </p>
+              <p className="text-sm font-inter text-gray-500">
+                {item.subtitle}
+              </p>
             </div>
           </div>
 

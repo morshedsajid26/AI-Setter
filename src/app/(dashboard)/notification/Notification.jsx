@@ -8,76 +8,62 @@ import { FiX } from "react-icons/fi";
 const Notification = () => {
   const [baseOnTitle, setBaseOnTitle] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [popOpen,setPopOpen]= useState(false);
+  const [popOpen, setPopOpen] = useState(false);
 
   const pageItems = [
     {
-      message:
-        " Facebook API token expired — reconnect required.”",
+      message: " Facebook API token expired — reconnect required.”",
       time: "2025-01-10T10:00:00",
     },
     {
-      message:
-        "New Discovery Call booked by James for Monday 4 PM”",
+      message: "New Discovery Call booked by James for Monday 4 PM”",
       time: "2025-01-10T11:00:00",
     },
-   
+
     {
-      message:
-        "AI detected Mindset Issue for user Rafi (Instagram)”",
+      message: "AI detected Mindset Issue for user Rafi (Instagram)”",
       time: "2024-01-10T12:00:00",
     },
     {
-      message:
-        "New DM from Roni on Instagram: “Hey I need help…",
+      message: "New DM from Roni on Instagram: “Hey I need help…",
       time: "2025-01-10T10:00:00",
     },
     {
-      message:
-        "New Discovery Call booked by James for Monday 4 PM”",
+      message: "New Discovery Call booked by James for Monday 4 PM”",
       time: "2025-01-10T11:00:00",
     },
-   
+
     {
-      message:
-        " Facebook API token expired — reconnect required.”",
+      message: " Facebook API token expired — reconnect required.”",
       time: "2024-01-10T12:00:00",
     },
     {
-      message:
-        "New DM from Roni on Instagram: “Hey I need help…",
+      message: "New DM from Roni on Instagram: “Hey I need help…",
       time: "2025-01-10T10:00:00",
     },
     {
-      message:
-        " Facebook API token expired — reconnect required.”",
+      message: " Facebook API token expired — reconnect required.”",
       time: "2025-01-10T11:00:00",
     },
-   
-   {
-      message:
-        " Facebook API token expired — reconnect required.”",
+
+    {
+      message: " Facebook API token expired — reconnect required.”",
       time: "2025-01-10T11:00:00",
     },
-     {
-      message:
-        " Facebook API token expired — reconnect required.”",
+    {
+      message: " Facebook API token expired — reconnect required.”",
       time: "2025-01-10T11:00:00",
     },
-   
-     {
-      message:
-        " Facebook API token expired — reconnect required.”",
+
+    {
+      message: " Facebook API token expired — reconnect required.”",
       time: "2025-01-10T11:00:00",
     },
-   
-     {
-      message:
-        " Facebook API token expired — reconnect required.”",
+
+    {
+      message: " Facebook API token expired — reconnect required.”",
       time: "2025-01-10T11:00:00",
     },
-   
-   
   ];
 
   // Set data for pagination
@@ -115,7 +101,7 @@ const Notification = () => {
     <div className="w-full p-7 bg-white  overflow-x-auto rounded-[10px]">
       {/* Header */}
       <div className="flex items-center gap-[14px]">
-        <Bredcumb/>
+        <Bredcumb />
       </div>
 
       {/* Total Notifications */}
@@ -132,9 +118,10 @@ const Notification = () => {
             key={index}
             className="w-full hover:bg-[#FFCDD3]  transition-all duration-300 py-3 px-[25px] c"
           >
-            <div 
-             onClick={() => setPopOpen(true)}
-            className="w-full flex items-center justify-between cursor-pointer">
+            <div
+              onClick={() => setPopOpen(true)}
+              className="w-full flex items-center justify-between cursor-pointer"
+            >
               <p className="w-[80%] text-[#333333]   text-[16px] font-inter font-semibold">
                 {item.message}
               </p>
@@ -154,7 +141,7 @@ const Notification = () => {
         setCurrentPage={setCurrentPage}
       />
 
-    {/* {popOpen && (
+      {/* {popOpen && (
         <div className="fixed inset-0  bg-[#D9D9D9]/80 flex items-center justify-center z-50 ">
           <div className="bg-white rounded-4xl py-14 px-14 w-[30%]  ">
 

@@ -8,8 +8,8 @@ const FAQdropdown = ({question,answer,className}) => {
     const [dropdown,setDropdown]=useState(false);
   return (
     <div className={` ${className}`}>
-      <div  onClick={()=>setDropdown(!dropdown)}  className="one    bg-white cursor-pointer px-8 rounded-2xl">
-                      <div  className="up flex items-center justify-between py-4 md:py-[25.5px]">
+      <div  onClick={()=>setDropdown(!dropdown)}  className="one  bg-white cursor-pointer px-8 border-b border-[#000000]/10 ">
+                      <div  className="up flex items-center justify-between py-[25.5px] ">
                           <h4 className='text-[#000000] text-xl  font-inter'>{question}</h4>
                           {dropdown? <FaAngleUp className='h-6 w-6 text-[#717182] ' />: <FaAngleDown  className='h-6 w-6 text-[#717182] ' />}
                           

@@ -11,7 +11,9 @@ export default function PerformanceMetrics({
       <div className="flex justify-between items-center mb-2">
         <p className="text-[#0F172B]">{title}</p>
 
-        <p className="text-sm bg-[#DBEAFE] text-[#1447E6] px-3 py-1 rounded-full">{percent}%</p>
+        <p className="text-sm bg-[#DBEAFE] text-[#1447E6] px-3 py-1 rounded-full">
+          {percent}%
+        </p>
       </div>
 
       {/* Progress Background */}
@@ -21,7 +23,7 @@ export default function PerformanceMetrics({
           className="h-full flex items-center rounded-full justify-start text-white text-sm font-medium pl-3 "
           style={{
             width: `${percent}%`,
-            backgroundColor: "#900616", 
+            backgroundColor: "#900616",
           }}
         ></div>
       </div>

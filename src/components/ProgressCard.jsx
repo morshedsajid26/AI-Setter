@@ -21,31 +21,25 @@ export default function ProgressCard({
 
         <div className="flex items-center gap-3">
           {/* Dropped Text */}
-        {isNegative && (
-          <p className="  text-sm text-[#E7000B]">
-            {dropped} dropped
-          </p>
-        )}
-        <p className="text-sm">{percent}%</p>
+          {isNegative && (
+            <p className="  text-sm text-[#E7000B]">{dropped} dropped</p>
+          )}
+          <p className="text-sm">{percent}%</p>
         </div>
-
       </div>
 
       {/* Progress Background */}
       <div className="w-full bg-[#E9EEF3] h-10 rounded-full overflow-hidden">
-
         {/* Filled Bar */}
         <div
           className="h-full flex items-center justify-start text-white text-sm font-medium pl-3 "
           style={{
             width: `${percent}%`,
-            backgroundColor: "#900616", 
+            backgroundColor: "#900616",
           }}
         >
           {percent}%
         </div>
-
-      
       </div>
     </div>
   );

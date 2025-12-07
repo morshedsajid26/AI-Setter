@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FiMail, FiPhone, FiMapPin, FiBriefcase } from "react-icons/fi";
-import {  FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { AiOutlineExport } from "react-icons/ai";
 import { FiCalendar } from "react-icons/fi";
 
@@ -16,7 +16,6 @@ export default function ActiveLeads({ data }) {
 
   return (
     <div className="p-6 space-y-6 bg-white h-[85vh] font-inter overflow-scroll hide-scrollbar">
-
       {/* Title */}
       <div>
         <h2 className="font-semibold text-lg text-[#0F172A]">Lead Details</h2>
@@ -62,10 +61,11 @@ export default function ActiveLeads({ data }) {
 
       {/* CONTACT INFO */}
       <div>
-        <p className="text-sm font-medium text-[#0F172A] mb-3">Contact Information</p>
+        <p className="text-sm font-medium text-[#0F172A] mb-3">
+          Contact Information
+        </p>
 
         <div className="space-y-2 text-[#334155]">
-
           <div className="flex items-center gap-2">
             <FaUser className="text-[#64748B]" />
             <span>{data.contact.name}</span>
@@ -105,7 +105,9 @@ export default function ActiveLeads({ data }) {
 
       {/* LAST INTERACTIONS */}
       <div>
-        <p className="text-sm font-medium text-[#0F172A] mb-2">Last Interactions</p>
+        <p className="text-sm font-medium text-[#0F172A] mb-2">
+          Last Interactions
+        </p>
 
         <div className="space-y-3">
           {data.lastInteractions.map((item, i) => (
@@ -123,11 +125,11 @@ export default function ActiveLeads({ data }) {
       {/* BUTTONS */}
       <div className="space-y-3 pt-4">
         <button className="w-full bg-[#900616] text-white py-3 rounded-lg flex items-center justify-center gap-2 font-medium">
-          <AiOutlineExport className='h-6 w-6' /> Sync to HubSpot
+          <AiOutlineExport className="h-6 w-6" /> Sync to HubSpot
         </button>
 
         <button className="w-full border py-3 rounded-lg font-medium text-[#0F172A] flex items-center justify-center gap-2">
-          <FiCalendar className="w-6 h-6"/>
+          <FiCalendar className="w-6 h-6" />
           Book Meeting
         </button>
       </div>

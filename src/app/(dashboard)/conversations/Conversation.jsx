@@ -1,10 +1,9 @@
 "use client";
 import React, { useState, useMemo } from "react";
 import Bredcumb from "@/src/components/Bredcumb";
-import ConversationList, { data } from '@/src/components/ConversationList'
+import ConversationList, { data } from "@/src/components/ConversationList";
 import ChatWindow from "@/src/components/ChatWindow";
 import ActiveLeads from "@/src/components/ActiveLeads";
-
 
 function convertToDate(timeAgo) {
   const now = new Date();
@@ -25,49 +24,34 @@ function convertToDate(timeAgo) {
   return now;
 }
 const Conversation = () => {
-
   const sortedData = useMemo(() => {
     return [...data].sort(
-      (a, b) =>
-        convertToDate(b.lastMessageAt) - convertToDate(a.lastMessageAt)
+      (a, b) => convertToDate(b.lastMessageAt) - convertToDate(a.lastMessageAt)
     );
   }, []);
 
-   const [activeConversation, setActiveConversation] = useState(
-    sortedData[0]
-  );
+  const [activeConversation, setActiveConversation] = useState(sortedData[0]);
 
   return (
-    <div className='grid grid-cols-12 gap-1 '>
-      <div className='bg-white col-span-3 p-2   '>
+    <div className="grid grid-cols-12 gap-1 ">
+      <div className="bg-white col-span-3 p-2   ">
         <div>
-            <Bredcumb/>
+          <Bredcumb />
         </div>
 
         <ConversationList
-        activeId={activeConversation?.id}
+          activeId={activeConversation?.id}
           onSelect={(item) => setActiveConversation(item)}
         />
       </div>
-       <div className='bg-red- col-span-6 '>
-
+      <div className="bg-red- col-span-6 ">
         <ChatWindow data={activeConversation} />
-       </div>
-        <div className='bg-white col-span-3'>
-          <ActiveLeads data={activeConversation?.leadDetails}  />
-        </div>
+      </div>
+      <div className="bg-white col-span-3">
+        <ActiveLeads data={activeConversation?.leadDetails} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Conversation
-
-
-
-
-
-
-
-
-
-  
+export default Conversation;

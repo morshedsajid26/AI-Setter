@@ -49,26 +49,36 @@ export default function ChatWindow({ data }) {
 
   return (
     <div className="flex flex-col justify-between bg-white font-inter h-full overflow-scroll hide-scrollbar">
-
       {/* ---------------- HEADER ---------------- */}
       <div className="p-4 bg-white flex items-center gap-3 ">
         <div className="w-10 h-10 bg-[#900616] text-white rounded-full flex items-center justify-center font-semibold">
-          {data.name.split(" ").map((w) => w[0]).join("")}
+          {data.name
+            .split(" ")
+            .map((w) => w[0])
+            .join("")}
         </div>
 
         <div>
-          <h2 className="font-semibold text-[16px] text-[#0F172B]">{data.name}</h2>
+          <h2 className="font-semibold text-[16px] text-[#0F172B]">
+            {data.name}
+          </h2>
           <p className="text-sm text-[#94A3B8]">@{data.username}</p>
         </div>
 
         {data.platform === "instagram" && (
-          <span className="text-pink-500 text-xl"><FaInstagram /></span>
+          <span className="text-pink-500 text-xl">
+            <FaInstagram />
+          </span>
         )}
         {data.platform === "facebook" && (
-          <span className="text-blue-600 text-xl"><FiFacebook /></span>
+          <span className="text-blue-600 text-xl">
+            <FiFacebook />
+          </span>
         )}
         {data.platform === "linkedin" && (
-          <span className="text-blue-600 text-xl"><FiLinkedin /></span>
+          <span className="text-blue-600 text-xl">
+            <FiLinkedin />
+          </span>
         )}
       </div>
 
@@ -87,7 +97,6 @@ export default function ChatWindow({ data }) {
       >
         {messages.map((msg, idx) => (
           <div key={idx} className="flex flex-col">
-
             {msg.from === "assistant" && (
               <p className="text-xs text-[#94A3B8] mb-1">AI Assistant</p>
             )}
@@ -95,13 +104,14 @@ export default function ChatWindow({ data }) {
             <div
               className={`
                 max-w-[80%] px-4 py-3 rounded-2xl text-[15px]
-                ${msg.from === "assistant"
-                  ? "bg-[#AE1022] text-white rounded-br-none"
-                  : "bg-[#F1F5F9] text-[#0F172B] rounded-bl-none"
+                ${
+                  msg.from === "assistant"
+                    ? "bg-[#AE1022] text-white rounded-br-none"
+                    : "bg-[#F1F5F9] text-[#0F172B] rounded-bl-none"
                 }
               `}
               style={{
-                alignSelf: msg.from === "assistant" ? "flex-start" : "flex-end"
+                alignSelf: msg.from === "assistant" ? "flex-start" : "flex-end",
               }}
             >
               {msg.text}
@@ -110,7 +120,7 @@ export default function ChatWindow({ data }) {
             <p
               className="text-xs text-[#94A3B8] mt-1"
               style={{
-                alignSelf: msg.from === "assistant" ? "flex-start" : "flex-end"
+                alignSelf: msg.from === "assistant" ? "flex-start" : "flex-end",
               }}
             >
               {msg.time}
@@ -127,9 +137,7 @@ export default function ChatWindow({ data }) {
           <h3 className="font-semibold text-[#0E5135] text-[15px] mb-1">
             Ready to book a discovery call?
           </h3>
-          <p className="text-sm text-[#0E5135]">
-            15–20 minute intro session
-          </p>
+          <p className="text-sm text-[#0E5135]">15–20 minute intro session</p>
         </div>
 
         <button className="px-5 py-2 bg-[#00A63E] hover:bg-[#00A63E]/80 text-white font-medium rounded-lg transition-all duration-300 cursor-pointer">
@@ -153,7 +161,6 @@ export default function ChatWindow({ data }) {
       {/* ---------------- INPUT BAR ---------------- */}
       <div className="p-4 bg-white">
         <div className="flex items-center gap-3 bg-[#EEF1F5] px-4 py-3 rounded-full">
-
           <input
             className="flex-1 bg-transparent outline-none text-sm"
             placeholder="Type a message... (AI will review before sending)"
@@ -165,11 +172,11 @@ export default function ChatWindow({ data }) {
           <button className="text-[#900616]" onClick={sendMessage}>
             <FiSend size={20} />
           </button>
-
         </div>
 
         <p className="text-xs mt-2 text-[#94A3B8]">
-          AI Assistant is active — responses are automated but you can override anytime
+          AI Assistant is active — responses are automated but you can override
+          anytime
         </p>
       </div>
     </div>

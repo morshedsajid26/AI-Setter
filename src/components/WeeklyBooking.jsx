@@ -18,10 +18,7 @@ const data = [
 
 export default function WeeklyBookingBar() {
   return (
-    <div
-      className="w-full h-[300px]"
-       
-    >
+    <div className="w-full h-[300px]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}

@@ -566,7 +566,7 @@ export default function ConversationList({ onSelect, activeId }) {
           placeholder="Search conversations..."
         />
 
-        <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#717182]"/>
+        <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#717182]" />
       </div>
 
       <div className="flex my-3 gap-5">
@@ -626,7 +626,6 @@ export default function ConversationList({ onSelect, activeId }) {
         {/* Conversation Items */}
         {filteredData.map((item) => (
           <div
-            
             key={item.id}
             onClick={() => onSelect(item)}
             className={`flex gap-3 p-4 cursor-pointer   transition-all

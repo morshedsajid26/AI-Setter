@@ -24,10 +24,17 @@ export default function MessageVolumeChart() {
   return (
     <div className="w-full h-[300px]">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 0 }}>
+        <LineChart
+          data={data}
+          margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
+        >
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-          <XAxis dataKey="name" tick={{ fill: "#64748B" }} fontFamily="inter"   />
-          <YAxis tick={{ fill: "#64748B" }} domain={[0, 80]} fontFamily="inter"  />
+          <XAxis dataKey="name" tick={{ fill: "#64748B" }} fontFamily="inter" />
+          <YAxis
+            tick={{ fill: "#64748B" }}
+            domain={[0, 80]}
+            fontFamily="inter"
+          />
           <Tooltip />
           <Line
             type="monotone"

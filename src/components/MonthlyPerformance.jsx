@@ -20,12 +20,13 @@ const data = [
 
 export default function MonthlyPerformance() {
   return (
-    <div
-    className="font-inter"
-    style={{ width: "100%", height: 350 }}>
+    <div className="font-inter" style={{ width: "100%", height: 350 }}>
       <ResponsiveContainer>
-        <LineChart data={data} margin={{ top: 20, right: 30, left: 10, bottom: 10 }}>
-          <CartesianGrid stroke="#E5E7EB"  strokeDasharray="3 3" />
+        <LineChart
+          data={data}
+          margin={{ top: 20, right: 30, left: 10, bottom: 10 }}
+        >
+          <CartesianGrid stroke="#E5E7EB" strokeDasharray="3 3" />
 
           <XAxis dataKey="name" tick={{ fill: "#6B7280", fontSize: 14 }} />
           <YAxis

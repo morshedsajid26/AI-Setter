@@ -6,13 +6,54 @@ import React, { useMemo, useState, useEffect } from "react";
 
 // ======== BOOKING DATA ==========
 const bookings = [
-  { id: 1, clientName: "John Doe", type: "Discovery Call", date: "2025-12-07", time: "11:00 PM", status: "confirmed" },
-  { id: 2, clientName: "Jane Smith", type: "Discovery Call", date: "2025-12-08", time: "11:00 AM", status: "pending" },
-  { id: 3, clientName: "Emma Watson", type: "Strategy Call", date: "2025-12-10", time: "1:00 PM", status: "confirmed" },
-  { id: 4, clientName: "John Doe", type: "Discovery Call", date: "2025-12-07", time: "11:00 PM", status: "confirmed" },
-  { id: 5, clientName: "Jane Smith", type: "Discovery Call", date: "2025-12-08", time: "11:00 AM", status: "pending" },
-  { id: 6, clientName: "Emma Watson", type: "Strategy Call", date: "2025-12-10", time: "1:00 PM", status: "confirmed" },
-  
+  {
+    id: 1,
+    clientName: "John Doe",
+    type: "Discovery Call",
+    date: "2025-12-07",
+    time: "11:00 PM",
+    status: "confirmed",
+  },
+  {
+    id: 2,
+    clientName: "Jane Smith",
+    type: "Discovery Call",
+    date: "2025-12-08",
+    time: "11:00 AM",
+    status: "pending",
+  },
+  {
+    id: 3,
+    clientName: "Emma Watson",
+    type: "Strategy Call",
+    date: "2025-12-10",
+    time: "1:00 PM",
+    status: "confirmed",
+  },
+  {
+    id: 4,
+    clientName: "John Doe",
+    type: "Discovery Call",
+    date: "2025-12-07",
+    time: "11:00 PM",
+    status: "confirmed",
+  },
+  {
+    id: 5,
+    clientName: "Jane Smith",
+    type: "Discovery Call",
+    date: "2025-12-08",
+    time: "11:00 AM",
+    status: "pending",
+  },
+  {
+    id: 6,
+    clientName: "Emma Watson",
+    type: "Strategy Call",
+    date: "2025-12-10",
+    time: "1:00 PM",
+    status: "confirmed",
+  },
 ];
 
 // ======== DATE HELPERS ==========
@@ -52,9 +93,7 @@ function getClosestUpcoming(list) {
 
   if (upcoming.length === 0) return null;
 
-  return upcoming.sort(
-    (a, b) => new Date(a.date) - new Date(b.date)
-  )[0];
+  return upcoming.sort((a, b) => new Date(a.date) - new Date(b.date))[0];
 }
 
 export default function Calendar() {
@@ -65,9 +104,12 @@ export default function Calendar() {
   const filteredBookings = useMemo(() => {
     let result = bookings;
 
-    if (dateFilter === "today") result = bookings.filter((b) => isToday(b.date));
-    if (dateFilter === "week") result = bookings.filter((b) => isThisWeek(b.date));
-    if (dateFilter === "month") result = bookings.filter((b) => isThisMonth(b.date));
+    if (dateFilter === "today")
+      result = bookings.filter((b) => isToday(b.date));
+    if (dateFilter === "week")
+      result = bookings.filter((b) => isThisWeek(b.date));
+    if (dateFilter === "month")
+      result = bookings.filter((b) => isThisMonth(b.date));
 
     return result;
   }, [dateFilter]);
@@ -77,7 +119,6 @@ export default function Calendar() {
     const closest = getClosestUpcoming(filteredBookings);
     setSelectedBooking(closest);
   }, [filteredBookings]);
-  
 
   return (
     <div>
@@ -85,9 +126,7 @@ export default function Calendar() {
       <div>
         <div className="flex items-center gap-2">
           <Bredcumb />
-          <span className="font-inter text-[#000000] text-2xl">
-            & Bookings
-          </span>
+          <span className="font-inter text-[#000000] text-2xl">& Bookings</span>
         </div>
         <p className="text-[#606060] font-inter mt-2">
           Manage your upcoming meetings and calls
@@ -96,7 +135,6 @@ export default function Calendar() {
 
       {/* GRID */}
       <div className="grid grid-cols-12 gap-6 mt-8">
-
         {/* SUMMARY CARDS */}
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
           <p className="font-inter">Today Booking</p>
@@ -153,11 +191,11 @@ export default function Calendar() {
             </div>
           </div>
 
-         <BookingList 
-  bookings={filteredBookings} 
-  onSelect={setSelectedBooking} 
-  selectedBooking={selectedBooking}
-/>
+          <BookingList
+            bookings={filteredBookings}
+            onSelect={setSelectedBooking}
+            selectedBooking={selectedBooking}
+          />
         </div>
 
         {/* RIGHT: DETAILS PANEL */}

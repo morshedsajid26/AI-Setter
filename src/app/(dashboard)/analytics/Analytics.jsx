@@ -137,23 +137,13 @@ const Analytics = () => {
           </div>
 
           <div className="space-y-3">
+            <PerformanceMetrics title="Intent Detection" percent={100} />
 
-            <PerformanceMetrics 
-            title="Intent Detection" 
-            percent={100} />
+            <PerformanceMetrics title="Sentiment Analysis" percent={90} />
 
-            <PerformanceMetrics 
-            title="Sentiment Analysis" 
-            percent={90} />
+            <PerformanceMetrics title="Lead Scoring" percent={80} />
 
-            <PerformanceMetrics 
-            title="Lead Scoring" 
-            percent={80} />
-
-            <PerformanceMetrics 
-            title="Response Quality" 
-            percent={70} />
-
+            <PerformanceMetrics title="Response Quality" percent={70} />
           </div>
         </div>
       </div>

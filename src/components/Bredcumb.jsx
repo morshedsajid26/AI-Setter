@@ -5,19 +5,12 @@ import React from "react";
 const Bredcumb = () => {
   const pathname = usePathname();
 
- 
-  const pathParts = pathname
-    .split("/")
-    .filter((part) => part.trim() !== "");
+  const pathParts = pathname.split("/").filter((part) => part.trim() !== "");
 
- 
   const visible = pathParts.slice(-2);
 
-  
   const formatText = (text) => {
-    return text
-      .replaceAll("-", " ")  
-      .replace(/\b\w/g, (c) => c.toUpperCase()); 
+    return text.replaceAll("-", " ").replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
   return (

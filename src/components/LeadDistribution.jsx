@@ -1,11 +1,5 @@
 "use client";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const data = [
   { name: "Instagram", value: 45, color: "#EC156D" },

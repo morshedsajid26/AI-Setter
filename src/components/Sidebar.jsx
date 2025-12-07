@@ -45,7 +45,7 @@ const navitems = [
   },
   {
     name: "AI Settings",
-    link: "/staff/platform/settings",
+    link: "/ai/settings",
     icon: IoSettingsOutline ,
   },
   {
@@ -55,7 +55,7 @@ const navitems = [
   },
   {
     name: "Account",
-    link: "/staff/account",
+    link: "/account",
     icon: FaRegUser,
   },
   {

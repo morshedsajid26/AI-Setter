@@ -19,11 +19,9 @@ function timeAgo(timestamp) {
   return `${Math.floor(diff / 86400)} days ago`;
 }
 
-
 const ActivityItem = ({ icon, iconBg, title, subtitle, timestamp }) => {
   return (
     <div className="flex items-center justify-between py-4 ">
-     
       <div className="flex items-center gap-4">
         <div
           className={`w-10 h-10 rounded-xl flex items-center justify-center ${iconBg}`}
@@ -42,7 +40,6 @@ const ActivityItem = ({ icon, iconBg, title, subtitle, timestamp }) => {
     </div>
   );
 };
-
 
 const RecentActivity = () => {
   // Dynamic timestamps: last X minutes/hours

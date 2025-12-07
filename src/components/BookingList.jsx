@@ -1,5 +1,5 @@
-import React from 'react'
-import { FaCalendarAlt, FaClock, FaVideo } from 'react-icons/fa';
+import React from "react";
+import { FaCalendarAlt, FaClock, FaVideo } from "react-icons/fa";
 
 function getReadableDate(dateStr) {
   const today = new Date();
@@ -18,7 +18,7 @@ function getReadableDate(dateStr) {
 }
 
 /* ----------------- FIXED BOOKING CARD -------------------- */
-const BookingCard = ({ booking, onSelect ,isActive}) => {
+const BookingCard = ({ booking, onSelect, isActive }) => {
   const initials = booking.clientName
     .split(" ")
     .map((w) => w[0])
@@ -31,7 +31,11 @@ const BookingCard = ({ booking, onSelect ,isActive}) => {
       onClick={() => onSelect(booking)}
       className={`bg-white p-5 rounded-xl cursor-pointer flex flex-col justify-between font-inter
         border transition-all duration-200
-        ${isActive ? "border-[#900616]" : "border-transparent hover:border-[#900616]"}
+        ${
+          isActive
+            ? "border-[#900616]"
+            : "border-transparent hover:border-[#900616]"
+        }
       `}
     >
       <div className="flex justify-between items-center">
@@ -76,27 +80,23 @@ const BookingCard = ({ booking, onSelect ,isActive}) => {
           <span>Zoom</span>
         </div>
 
-        <span className="text-[#900616] cursor-pointer">
-          Join Meeting ↗
-        </span>
+        <span className="text-[#900616] cursor-pointer">Join Meeting ↗</span>
       </div>
     </div>
   );
 };
 
 /* ----------------- BOOKING LIST -------------------- */
-const BookingList = ({ bookings, onSelect ,selectedBooking }) => {
+const BookingList = ({ bookings, onSelect, selectedBooking }) => {
   return (
-    <div className="space-y-4  overflow-scroll hide-scrollbar h-[56vh] "
-    
-    >
-        {bookings.map((booking) => (
-       <BookingCard
-  key={booking.id}
-  booking={booking}
-  onSelect={onSelect}
-  isActive={selectedBooking?.id === booking.id}
-/>
+    <div className="space-y-4  overflow-scroll hide-scrollbar h-[56vh] ">
+      {bookings.map((booking) => (
+        <BookingCard
+          key={booking.id}
+          booking={booking}
+          onSelect={onSelect}
+          isActive={selectedBooking?.id === booking.id}
+        />
       ))}
     </div>
   );
