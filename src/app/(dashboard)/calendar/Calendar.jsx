@@ -89,7 +89,7 @@ export default function Calendar() {
             & Bookings
           </span>
         </div>
-        <p className="text-[#606060] font-inter">
+        <p className="text-[#606060] font-inter mt-2">
           Manage your upcoming meetings and calls
         </p>
       </div>

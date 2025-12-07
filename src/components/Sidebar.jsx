@@ -40,7 +40,7 @@ const navitems = [
   },
   {
     name: "Analytics",
-    link: "/staff/manage/reward",
+    link: "/analytics",
     icon: MdOutlineAnalytics,
   },
   {
@@ -60,7 +60,7 @@ const navitems = [
   },
   {
     name: "Help & Support",
-    link: "/staff/support",
+    link: "/help",
     icon: IoIosHelpCircleOutline,
   },
 ];

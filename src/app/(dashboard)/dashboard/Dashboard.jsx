@@ -17,7 +17,7 @@ const Dashboard = () => {
       <div className=" flex items-center justify-between">
         <div>
           <Bredcumb />
-          <p className="text-[#606060] font-inter">
+          <p className="text-[#606060] font-inter mt-2">
             Welcome back! Here's what's happening today.
           </p>
         </div>

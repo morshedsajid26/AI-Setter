@@ -19,7 +19,7 @@ const Topbar = () => {
        
       
             
-            <Link href="/businessowner/notification">
+            <Link href="/notification">
               <IoMdNotificationsOutline className="h-8 w-8  cursor-pointer" />
             </Link>
           
