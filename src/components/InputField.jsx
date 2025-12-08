@@ -22,7 +22,7 @@ const InputField = ({
         value={value}
         onChange={readOnly ? undefined : onChange}
         readOnly={readOnly}
-        className={`bg-[#F3F3F5] outline-none p-3 text-[#0A0A0A] placeholder:text-[#5D5D5D] font-inter rounded-xl 
+        className={`bg-[#F3F3F5] outline-none p-3 text-[#0A0A0A] placeholder:text-[#5D5D5D] font-inter 
          
           ${inputClass}`}
       />

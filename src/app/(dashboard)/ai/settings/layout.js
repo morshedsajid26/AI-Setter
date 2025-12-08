@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FiSave } from "react-icons/fi";
+import { RiResetLeftLine } from "react-icons/ri";
+
 
 export default function Layout({ children }) {
   const pathname = usePathname();
@@ -23,10 +26,26 @@ export default function Layout({ children }) {
 
   return (
     <div className="font-inter">
-      <h3 className="capitalize text-black text-2xl">AI Settings</h3>
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="capitalize text-black text-2xl">AI Settings</h3>
       <p className="text-[#606060] mt-2">
         Customize JamieGPT's tone, behavior, and rules
       </p>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <button className="bg-white py-2 px-4 rounded-lg text-[#0A0A0A] flex items-center gap-2 ">
+            <RiResetLeftLine className="rotate-280" />
+            Reset to Default
+          </button>
+
+          <button className="bg-[#900616] py-2 px-4 rounded-lg text-white flex items-center gap-2">
+            <FiSave />
+            Save Changes
+          </button>
+        </div>
+      </div>
 
       <div className="bg-white py-2 px-5 flex gap-10 mt-8 rounded-full">
         

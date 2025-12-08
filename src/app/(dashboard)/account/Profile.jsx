@@ -27,31 +27,36 @@ const Profile = () => {
           <form action="" className="grid grid-cols-12 gap-x-10 gap-y-6">
             <InputField
               className={`col-span-6`}
-              readOnly="true"
+              inputClass={`rounded-lg`}
+              readOnly={true}
               placeholder={`Jamie`}
               label={`First Name`}
             />
             <InputField
               className={`col-span-6`}
-              readOnly="true"
+              inputClass={`rounded-lg`}
+              readOnly={true}
               placeholder={`Martinez`}
               label={`Last Name`}
             />
             <InputField
               className={`col-span-12`}
-              readOnly="true"
+              inputClass={`rounded-lg`}
+              readOnly={true}
               placeholder={`jamie@coach.com`}
               label={`Email`}
             />
             <InputField
               className={`col-span-12`}
-              readOnly="true"
+              inputClass={`rounded-lg`}
+              readOnly={true}
               placeholder={`Jamie's Wellness Coaching`}
               label={`Business Name`}
             />
             <InputField
               className={`col-span-12`}
-              readOnly="true"
+              inputClass={`rounded-lg`}
+              readOnly={true}
               placeholder={`https://jamie.coach`}
               label={`Website`}
             />
@@ -75,7 +80,10 @@ const Profile = () => {
         </div>
 
         <div className="flex items-center gap-x-5">
-          <InputField placeholder={`email@example.com`} />
+          <InputField
+            placeholder={`email@example.com`}
+            inputClass={`rounded-lg`}
+          />
 
           <button className="bg-[#900616] mt-2 py-3 px-8 rounded-lg font-inter text-white  cursor-pointer">
             Invite
@@ -83,55 +91,45 @@ const Profile = () => {
         </div>
 
         <div>
-
-            <div className="border border-[#E2E8F0] p-4 rounded-lg flex items-center justify-between mt-6">
-
-              <div className="flex items-center gap-5">
-                  <h3
-              className="w-10 h-10 bg-[#BF0C21] text-white rounded-full
+          <div className="border border-[#E2E8F0] p-4 rounded-lg flex items-center justify-between mt-6">
+            <div className="flex items-center gap-5">
+              <h3
+                className="w-10 h-10 bg-[#BF0C21] text-white rounded-full
                 flex items-center justify-center font-inter  "
-            >
-              JM
-            </h3>
+              >
+                JM
+              </h3>
 
-            <div>
+              <div>
                 <h3 className="font-inter text-[#0A0A0A]">Jamie Martinez</h3>
                 <p className="text-[#717182] font-inter ">jamie@coach.com</p>
-            </div>
               </div>
-
-              <span className="py-1 px-2 bg-[#900616] rounded-lg font-inter text-white cursor-pointer`" >
-                Owner
-              </span>
-
             </div>
 
+            <span className="py-1 px-2 bg-[#900616] rounded-lg font-inter text-white cursor-pointer`">
+              Owner
+            </span>
+          </div>
 
-            <div className="border border-[#E2E8F0] p-4 rounded-lg flex items-center justify-between mt-6">
-
-              <div className="flex items-center gap-5">
-                  <h3
-              className="w-10 h-10 bg-[#E2E8F0] text-[#45556C] rounded-full
+          <div className="border border-[#E2E8F0] p-4 rounded-lg flex items-center justify-between mt-6">
+            <div className="flex items-center gap-5">
+              <h3
+                className="w-10 h-10 bg-[#E2E8F0] text-[#45556C] rounded-full
                 flex items-center justify-center font-inter  "
-            >
-              SK
-            </h3>
+              >
+                SK
+              </h3>
 
-            <div>
+              <div>
                 <h3 className="font-inter text-[#0A0A0A]">Sarah Kim</h3>
                 <p className="text-[#717182] font-inter ">sarah@coach.com</p>
-            </div>
               </div>
-
-              <button className="py-1 px-2  rounded-lg font-inter hover:bg-[#900616] hover:text-white  cursor-pointer transition-all duration-300" >
-                Remove
-              </button>
-
             </div>
 
-
-
-
+            <button className="py-1 px-2  rounded-lg font-inter hover:bg-[#900616] hover:text-white  cursor-pointer transition-all duration-300">
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>

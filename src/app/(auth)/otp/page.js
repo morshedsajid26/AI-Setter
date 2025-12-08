@@ -1,11 +1,10 @@
 import React from 'react'
-import SignIn from './(auth)/signin/SignIn'
+import OTP from './OTP'
 
 const page = () => {
   return (
     <div>
-      <SignIn/>
-      
+      <OTP/>
     </div>
   )
 }

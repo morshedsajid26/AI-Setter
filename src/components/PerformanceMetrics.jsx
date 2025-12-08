@@ -2,7 +2,7 @@
 
 export default function PerformanceMetrics({
   title,
-
+  text,
   percent,
 }) {
   return (
@@ -27,6 +27,7 @@ export default function PerformanceMetrics({
           }}
         ></div>
       </div>
+      <p className="mt-3 font-inter text-sm text-[#45556C]">{text}</p>
     </div>
   );
 }

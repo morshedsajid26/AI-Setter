@@ -1,11 +1,10 @@
 import React from 'react'
-import SignIn from './(auth)/signin/SignIn'
+import Success from './Success'
 
 const page = () => {
   return (
     <div>
-      <SignIn/>
-      
+      <Success/>
     </div>
   )
 }
