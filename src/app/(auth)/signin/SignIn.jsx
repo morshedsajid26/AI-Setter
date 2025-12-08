@@ -36,7 +36,7 @@ const SignIn = () => {
               <input type="checkbox" className="w-4 h-4 accent-[#900616]" />
               <p className="text-[#333333] font-inter ">Remember Password</p>
             </div>
-            <Link href="/forgot-password">
+            <Link href="/forgotpassword">
               <p className="text-[#900616] font-inter ">Forgot Password?</p>
             </Link>
           </div>
