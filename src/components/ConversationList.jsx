@@ -639,7 +639,7 @@ export default function ConversationList({ onSelect, activeId }) {
         </button>
       </div>
 
-      <div className="overflow-scroll hide-scrollbar h-[68vh]">
+      <div className="overflow-scroll hide-scrollbar h-[66vh]">
         {/* Conversation Items */}
         {filteredData.map((item) => (
           <div
