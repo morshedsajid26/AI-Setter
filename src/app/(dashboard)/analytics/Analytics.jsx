@@ -120,9 +120,9 @@ const Analytics = () => {
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-6 p-6">
           <div className="mb-6">
-            <p className="font-inter">Monthly Performance</p>
+            <p className="font-inter">Source Breakdown</p>
             <p className="font-inter text-[#717182] mt-2">
-              DMs, qualified leads, and bookings over time
+              Lead distribution by platform
             </p>
           </div>
           <LeadDistribution />
