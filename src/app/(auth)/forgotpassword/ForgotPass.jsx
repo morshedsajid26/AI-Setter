@@ -33,7 +33,7 @@ const ForgotPass = () => {
           
         />
   
-<Link href={`/newpassword`} className="w-full">
+<Link href={`/otp`} className="w-full">
           <button 
           type="submit"
           

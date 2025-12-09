@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import { FaInstagram, FaSearch } from "react-icons/fa";
+import { FaInstagram, FaSearch, FaTiktok } from "react-icons/fa";
 import { FiFacebook, FiInstagram, FiLinkedin } from "react-icons/fi";
 
 // YOUR DATA
@@ -185,7 +185,7 @@ export const data = [
   {
     id: 5,
     name: "Olivia Parker",
-    platform: "instagram",
+    platform: "tiktok",
     score: 82,
     unread: 1,
     lastMessage: "This seems helpful! How do I start?",
@@ -350,7 +350,7 @@ export const data = [
   {
     id: 9,
     name: "Mia Johnson",
-    platform: "instagram",
+    platform: "tiktok",
     score: 72,
     unread: 1,
     lastMessage: "I want to lose weight before my wedding.",
@@ -569,7 +569,7 @@ export default function ConversationList({ onSelect, activeId }) {
         <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#717182]" />
       </div>
 
-      <div className="flex my-3 gap-5">
+      <div className="flex my-3 gap-5 overflow-x-scroll ">
         <button
           onClick={() =>
             setPlatformFilter(
@@ -620,6 +620,23 @@ export default function ConversationList({ onSelect, activeId }) {
           <FiLinkedin className="w-4 h-4" />
           LinkedIn
         </button>
+
+        <button
+          onClick={() =>
+            setPlatformFilter(
+              platformFilter === "tiktok" ? "all" : "tiktok"
+            )
+          }
+          className={`flex items-center gap-2 border p-2.5 rounded-lg cursor-pointer
+    ${
+      platformFilter === "tiktok"
+        ? "bg-[#900616] text-white"
+        : "border-black/10 text-[#0A0A0A]"
+    }`}
+        >
+          <FaTiktok className="w-4 h-4" />
+          TikTok
+        </button>
       </div>
 
       <div className="overflow-scroll hide-scrollbar h-[68vh]">
@@ -646,7 +663,7 @@ export default function ConversationList({ onSelect, activeId }) {
             {/* Details */}
             <div className="flex-1">
               {/* Name + Time */}
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center ">
                 <div className="flex items-center gap-2">
                   <span className=" text-[#0F172B]">{item.name}</span>
 
@@ -664,6 +681,12 @@ export default function ConversationList({ onSelect, activeId }) {
                   {item.platform === "linkedin" && (
                     <span className="text-blue-600 text-xl">
                       <FiLinkedin />
+                    </span>
+                  )}
+
+                  {item.platform === "tiktok" && (
+                    <span className="text-blue-600 text-xl">
+                      <FaTiktok />
                     </span>
                   )}
                 </div>

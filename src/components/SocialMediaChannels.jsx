@@ -46,7 +46,7 @@ export default function SocialMediaChannels() {
       <SocialAccountCard
         icon={<FaLinkedin className="text-[#155DFC]" />}
         title="Linkedin"
-        description="Connect your Instagram account to manage your DMs."
+        description="Connect LinkedIn to manage professional connections"
         connected={linkedinConnected}
         connectButton={`bg-[#155DFC]`}
         connectedAccount="@jamie.coach"
