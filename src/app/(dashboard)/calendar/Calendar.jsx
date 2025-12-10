@@ -137,28 +137,28 @@ export default function Calendar() {
       <div className="grid grid-cols-12 gap-6 mt-8">
         {/* SUMMARY CARDS */}
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter">Today Booking</p>
+          <p className="font-inter text-[#0F172B]">Today Booking</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             {bookings.filter((b) => isToday(b.date)).length}
           </p>
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter">This Week</p>
+          <p className="font-inter text-[#0F172B]">This Week</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             {bookings.filter((b) => isThisWeek(b.date)).length}
           </p>
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter">This Month</p>
+          <p className="font-inter text-[#0F172B]">This Month</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             {bookings.filter((b) => isThisMonth(b.date)).length}
           </p>
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter">No Show Rate</p>
+          <p className="font-inter text-[#0F172B]">No Show Rate</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             4.2%
           </p>
@@ -167,7 +167,7 @@ export default function Calendar() {
         {/* LEFT: BOOKING LIST */}
         <div className="rounded-2xl col-span-8">
           <div className="flex items-center justify-between">
-            <p className="font-inter mb-3">Upcoming Bookings</p>
+            <p className="font-inter mb-3 text-[#0F172B] ">Upcoming Bookings</p>
 
             {/* DATE FILTER BUTTONS */}
             <div className="flex gap-3 mb-4">

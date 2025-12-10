@@ -6,7 +6,7 @@ const TonePersonality = () => {
     <div>
       <div className="bg-[#FFFFFF] rounded-2xl p-6">
         <div className="mb-6">
-          <p className="font-inter">Personality Sliders</p>
+          <p className="font-inter text-[#0A0A0A]">Personality Sliders</p>
           <p className="font-inter text-[#717182] mt-2">
             Adjust how JamieGPT communicates with your leads
           </p>

@@ -14,7 +14,7 @@ export default function ProgressCard({
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-3">
           <p className="text-[#0F172B]">{title}</p>
-          <span className="bg-[#F1F5F9] text-[12px] px-3 py-0.5 rounded-lg">
+          <span className="bg-[#F1F5F9] text-[12px] text-[#314158] px-3 py-0.5 rounded-lg">
             {value}
           </span>
         </div>
@@ -24,7 +24,7 @@ export default function ProgressCard({
           {isNegative && (
             <p className="  text-sm text-[#E7000B]">{dropped} dropped</p>
           )}
-          <p className="text-sm">{percent}%</p>
+          <p className="text-sm text-[#45556C]">{percent}%</p>
         </div>
       </div>
 

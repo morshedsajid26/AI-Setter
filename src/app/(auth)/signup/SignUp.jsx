@@ -11,7 +11,7 @@ const SignUp = () => {
   return (
     <div className= 'bg-[#EAEAEA] h-screen grid justify-center items-center'>
 
-     <main className="bg-white  overflow-y-auto hide-scrollbar py-20 px-11 rounded-3xl  ">
+     <main className="bg-white  overflow-y-auto hide-scrollbar py-15 px-11 rounded-3xl  ">
       <form className="gap-5 flex flex-col items-center w-[480px] ">
 
         

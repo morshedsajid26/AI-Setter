@@ -56,7 +56,7 @@ const ChannelConnect = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4 font-inter">Connected Channels</h2>
+      <h2 className="text-xl font-bold mb-4 font-inter text-[#0F172B]">Connected Channels</h2>
 
       {channels.map((item) => {
         const Icon = ICON_COMPONENTS[item.type];

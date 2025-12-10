@@ -269,9 +269,9 @@ const Leads = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={handleExportCSV}
-            className="bg-[#FFFFFF] px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2 cursor-pointer"
+            className="bg-[#FFFFFF] text-[#0F172B] px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2 cursor-pointer"
           >
-            <BiExport className="w-6 h-6" />
+            <BiExport className="w-6 h-6 " />
             Export CSV
           </button>
           <button className="bg-[#900616] text-white px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2 cursor-pointer">
@@ -284,28 +284,28 @@ const Leads = () => {
       {/* CARDS + TABLE */}
       <div className="grid grid-cols-12 gap-6 mt-8">
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter ">Total Leads</p>
+          <p className="font-inter text-[#0F172B]">Total Leads</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             200
           </p>
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter ">Hot Leads</p>
+          <p className="font-inter text-[#0F172B]">Hot Leads</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             5
           </p>
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter ">Avg. score</p>
+          <p className="font-inter text-[#0F172B]">Avg. score</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             77
           </p>
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
-          <p className="font-inter ">Synced to hubspot</p>
+          <p className="font-inter text-[#0F172B]">Synced to hubspot</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             6
           </p>

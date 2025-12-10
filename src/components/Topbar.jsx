@@ -9,7 +9,7 @@ const Topbar = () => {
   return (
     <div className=" flex items-center justify-end gap-10 bg-[#FFFFFF] p-2  ">
       <Link href="/notification">
-        <IoMdNotificationsOutline className="h-8 w-8  cursor-pointer" />
+        <IoMdNotificationsOutline className="h-8 w-8  cursor-pointer text-[#0F172B]" />
       </Link>
 
       <Link href={`/account`}>

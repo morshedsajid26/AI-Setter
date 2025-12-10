@@ -7,7 +7,7 @@ import Password from "@/src/components/Password";
 const NewPass = () => {
   return (
     <div className=" grid justify-center items-center h-screen bg-[#EAEAEA]">
-      <main className="bg-white    overflow-y-auto hide-scrollbar py-30 px-18 rounded-3xl  ">
+      <main className="bg-white    overflow-y-auto hide-scrollbar py-20 px-18 rounded-3xl  ">
         <form className=" flex flex-col items-center text-cente gap-7 w-[480px]">
           <h3 className="font-inter font-medium text-[32px] text-[#333333]  ">
             Set a new password

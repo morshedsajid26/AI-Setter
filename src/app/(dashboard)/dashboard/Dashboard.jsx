@@ -32,8 +32,8 @@ const Dashboard = () => {
       <div className="grid grid-cols-12 gap-5 mt-4">
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
           <div className="flex items-center justify-between">
-            <p className="font-inter ">Total Messages</p>
-            <LuMessageSquare className="w-6 h-6" />
+            <p className="font-inter text-[#0F172B] ">Total Messages</p>
+            <LuMessageSquare className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
             1,200
@@ -46,8 +46,8 @@ const Dashboard = () => {
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
           <div className="flex items-center justify-between">
-            <p className="font-inter ">Leads Identified</p>
-            <FiUsers className="w-6 h-6" />
+            <p className="font-inter text-[#0F172B] ">Leads Identified</p>
+            <FiUsers className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
             20
@@ -60,8 +60,8 @@ const Dashboard = () => {
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
           <div className="flex items-center justify-between">
-            <p className="font-inter ">Bookings</p>
-            <IoCalendarOutline className="w-6 h-6" />
+            <p className="font-inter text-[#0F172B] ">Bookings</p>
+            <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
            53
@@ -74,8 +74,8 @@ const Dashboard = () => {
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
           <div className="flex items-center justify-between">
-            <p className="font-inter ">Conversion Rate</p>
-            <IoCalendarOutline className="w-6 h-6" />
+            <p className="font-inter text-[#0F172B]">Conversion Rate</p>
+            <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
             1,200

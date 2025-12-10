@@ -17,7 +17,7 @@ const MarketingToolsCard = ({ item,icon }) => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold">{item.name}</h3>
+            <h3 className="text-lg font-semibold text-[#0A0A0A]">{item.name}</h3>
             <p className="text-gray-500 text-sm">{item.description}</p>
           </div>
         </div>
@@ -49,19 +49,19 @@ const MarketingToolsCard = ({ item,icon }) => {
 
       {/* Buttons */}
       <div className="flex gap-3 mt-4">
-        <button className="px-4 py-2 border border-[#000000]/10 rounded-lg text-sm flex items-center gap-2">
+        <button className="px-4 py-2 border border-[#000000]/10 text-[#0A0A0A] rounded-lg text-sm flex items-center gap-2">
         <IoSettingsOutline className="h-4 w-4 cursor-pointer
         " />
           Configure
         </button>
 
-        <button className="px-4 py-2 border border-[#000000]/10 rounded-lg text-sm">
+        <button className="px-4 py-2 border border-[#000000]/10 text-[#0A0A0A]  rounded-lg text-sm">
           Test Connection
         </button>
 
         {connected ? (
           <button
-            className="px-4 py-2 border border-[#000000]/10 rounded-lg text-sm cursor-pointer
+            className="px-4 py-2 border border-[#000000]/10 text-[#0A0A0A]  rounded-lg text-sm cursor-pointer
             "
             onClick={() => setConnected(false)}
           >
@@ -69,7 +69,7 @@ const MarketingToolsCard = ({ item,icon }) => {
           </button>
         ) : (
           <button
-            className="px-4 py-2 border border-[#000000]/10 rounded-lg text-sm cursor-pointer
+            className="px-4 py-2 border border-[#000000]/10 text-[#0A0A0A]  rounded-lg text-sm cursor-pointer
             "
             onClick={() => setConnected(true)}
           >

@@ -36,7 +36,7 @@ export default function BookingDetails({ booking }) {
 
   return (
     <div className="font-inter  h-[59vh] overflow-scroll hide-scrollbar ">
-      <h2 className="text-lg font-medium mb-4">Booking Details</h2>
+      <h2 className="text-lg font-medium mb-4 text-[#0F172B]">Booking Details</h2>
 
       {/* CLIENT */}
       <p className="text-[#45556C] mb-2">Client</p>
@@ -56,12 +56,12 @@ export default function BookingDetails({ booking }) {
 
         <div className="flex items-center gap-2 mb-2">
           <FaCalendarAlt className="text-[#45556C]" />
-          <span>{readableDate}</span>
+          <p className="text-[#45556C]">{readableDate}</p>
         </div>
 
         <div className="flex items-center gap-2">
           <FaClock className="text-[#45556C]" />
-          <span>{booking.time} </span>
+          <p className="text-[#45556C]">{booking.time} </p>
         </div>
       </div>
 
@@ -70,8 +70,8 @@ export default function BookingDetails({ booking }) {
         <p className="text-sm text-[#45556C] mb-2">Meeting Link</p>
         <div className="bg-[#F3F6FA] px-4 py-3 rounded-xl flex items-center justify-between">
           <div className="flex items-center gap-2 text-[#606060] text-sm">
-            <FaVideo />
-            <span>zoom.us/j/123456</span>
+            <FaVideo  className=" text-[#0F172B]"/>
+            <p className="text-[#0F172B]">zoom.us/j/123456</p>
           </div>
           <a href={booking.link} target="_blank" className="text-[#900616]">
             ↗
@@ -96,7 +96,7 @@ export default function BookingDetails({ booking }) {
       {/* NOTES */}
       <div className="mb-6">
         <p className="text-sm text-[#45556C] mb-2">Notes</p>
-        <div className="bg-[#F3F6FA] px-4 py-3 rounded-xl text-sm text-[#606060]">
+        <div className="bg-[#F3F6FA] px-4 py-3 rounded-xl text-sm text-[#0F172B]">
           {booking.notes || "No notes added."}
         </div>
       </div>
@@ -106,9 +106,9 @@ export default function BookingDetails({ booking }) {
         Join Meeting
       </button>
 
-      <button className="w-full py-3 border rounded-lg mb-3">Reschedule</button>
+      <button className="w-full py-3 border border-black/10 rounded-lg mb-3 text-[#0A0A0A] ">Reschedule</button>
 
-      <button className="w-full py-3  text-[#C10007] font-medium">
+      <button className="w-full py-3 border border-black/10 rounded-lg  text-[#C10007] font-medium">
         Cancel Booking
       </button>
     </div>

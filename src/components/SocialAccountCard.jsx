@@ -58,7 +58,7 @@ export default function SocialAccountCard({
           <div className="flex justify-between items-center mt-4">
             <button
               onClick={onDisconnect}
-              className=" cursor-pointer w-full py-2 border border-[#E5E7EB] rounded-lg font-inter hover:bg-[#F9FAFB]"
+              className=" cursor-pointer w-full py-2 border border-[#E5E7EB] rounded-lg font-inter hover:bg-[#F9FAFB] text-[#0A0A0A]"
             >
               Disconnect
             </button>

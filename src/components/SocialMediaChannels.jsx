@@ -57,11 +57,11 @@ export default function SocialMediaChannels() {
 
       {/* Tiktok */}
       <SocialAccountCard
-        icon={<AiFillTikTok className=" w-10 h-10" />}
+        icon={<AiFillTikTok className=" w-10 h-10 text-[#1D293D]" />}
         title="TikTok"
         description="Manage TikTok DMs and comments"
         connected={tiktokConnected}
-        connectButton={`bg-[#000000]`}
+        connectButton={`bg-[#1D293D]`}
         connectedAccount="@jamie.fb"
         onConnect={() => setTiktokConnected(true)}
         onDisconnect={() => setTiktokConnected(false)}

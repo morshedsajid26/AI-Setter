@@ -9,7 +9,7 @@ import Link from "next/link";
 const SignIn = () => {
   return (
     <div className="bg-[#EAEAEA] h-screen grid justify-center items-center">
-      <main className="bg-white overflow-y-auto hide-scrollbar py-30 px-11 rounded-3xl  ">
+      <main className="bg-white overflow-y-auto hide-scrollbar py-15 px-11 rounded-3xl  ">
         <form className="gap-5 flex flex-col items-center w-[480px] ">
           <h3 className="font-inter font-medium text-[32px] text-[#333333] mb-6 mt-">
             Signin to Account

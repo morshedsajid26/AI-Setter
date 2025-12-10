@@ -13,7 +13,7 @@ const AutomationCard = () => {
             <FaRegClock className="text-[#900616]" />
 
             <div>
-              <p className="font-inter">No Reply in 2 hours </p>
+              <p className="font-inter text-[#0A0A0A]">No Reply in 2 hours </p>
               <p className="font-inter text-sm text-[#4A5565]">
                 Send soft reminder
               </p>
@@ -68,7 +68,7 @@ const AutomationCard = () => {
         </div>
 
         <div className="flex gap-10 items-center">
-          <button className="border border-black/10 w-full text-center py-2 rounded-lg mt-4 font-inter">
+          <button className="border border-black/10 text-[#0A0A0A] w-full text-center py-2 rounded-lg mt-4 font-inter">
             Text Message
           </button>
           <button className="border border-black/10 w-full text-center py-2 rounded-lg mt-4 font-inter bg-[#900616] text-white">
