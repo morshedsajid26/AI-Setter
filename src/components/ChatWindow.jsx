@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { FiFacebook, FiLinkedin, FiSend } from "react-icons/fi";
 
 export default function ChatWindow({ data }) {
@@ -78,6 +78,11 @@ export default function ChatWindow({ data }) {
         {data.platform === "linkedin" && (
           <span className="text-blue-600 text-xl">
             <FiLinkedin />
+          </span>
+        )}
+        {data.platform === "tiktok" && (
+          <span className="text-blue-600 text-xl">
+            <FaTiktok />
           </span>
         )}
       </div>
