@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import Avatar from "@/public/Avatar.png";
+import logo from "@/public/logo.png";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import Link from "next/link";
 
@@ -13,7 +14,8 @@ const Topbar = () => {
       </Link>
 
       <Link href={`/account`}>
-        <Image src={Avatar} alt="profile" />
+        {/* <Image src={Avatar} alt="profile" /> */}
+        <Image src={logo} alt="logo" />
       </Link>
     </div>
   );
