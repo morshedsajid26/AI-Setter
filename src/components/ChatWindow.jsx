@@ -167,7 +167,7 @@ export default function ChatWindow({ data }) {
       <div className="p-4 bg-white">
         <div className="flex items-center gap-3 bg-[#EEF1F5] px-4 py-3 rounded-full">
           <input
-            className="flex-1 bg-transparent outline-none text-sm"
+            className="flex-1 bg-transparent outline-none text-sm text-[#717182] placeholder:text-[#717182] "
             placeholder="Type a message... (AI will review before sending)"
             value={input}
             onChange={(e) => setInput(e.target.value)}
