@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -18,6 +18,7 @@ import logo from "@/public/logo.png";
 import logout from "@/public/logout.png";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+// import { useRouter } from "next/router";
 
 const navitems = [
   {
@@ -72,6 +73,7 @@ const navitems = [
 const Sidebar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   
   
   
