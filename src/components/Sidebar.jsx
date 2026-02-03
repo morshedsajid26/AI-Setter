@@ -16,6 +16,8 @@ import { IoIosHelpCircleOutline } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import logo from "@/public/logo.png";
 import logout from "@/public/logout.png";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 const navitems = [
   {
@@ -65,10 +67,26 @@ const navitems = [
   },
 ];
 
+
+
 const Sidebar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  
+  
+  
+  const handleLogout = () => {
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
+    
+     toast.success("Logout successful!");
 
+        //  Small delay for UX
+        setTimeout(() => {
+          router.push("/signin");
+        }, 800);
+  
+  }
   return (
     <>
       {/* 🔹 Toggle Button (visible on small screens) */}
@@ -125,7 +143,7 @@ const Sidebar = () => {
 
         {/* Logout */}
         <div className="">
-          <Link href="/signin">
+          <Link href="/signin" onClick={handleLogout}>
             <button className="flex items-center gap-4 py-2 px-2 w-full text-[#FF1100] hover:text-white hover:bg-[#900616] font-inter font-medium cursor-pointer rounded-lg transition-all duration-200 group">
               <Image src={logout} alt="log out" className="w-6 h-6 group-hover:invert" />
               Log Out
