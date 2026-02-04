@@ -136,8 +136,9 @@ const Edit = () => {
 
       toast.success("Profile updated successfully");
 
+      // router.refresh();
      setTimeout(() => {
-          router.push("/account");
+       router.push("/account");
         }, 600);
       
     } catch (err) {
