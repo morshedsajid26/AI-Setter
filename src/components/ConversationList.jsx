@@ -75,7 +75,7 @@ export default function ConversationList({
   }, [platformFilter, searchTerm, sortedData]);
 
   return (
-    <div className="font-inter">
+    <div className="font-inter ">
       {/* SEARCH */}
       <div className="mt-3 relative">
         <input
@@ -115,7 +115,7 @@ export default function ConversationList({
       </div>
 
       {/* LIST */}
-      <div className="overflow-scroll hide-scrollbar h-[66vh]">
+      <div className="overflow-scroll hide-scrollbar max-h-[66vh]">
         {filteredData.map((item) => (
           <div
             key={item.id}

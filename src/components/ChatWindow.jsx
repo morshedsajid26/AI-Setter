@@ -127,7 +127,7 @@ export default function ChatWindow({ data }) {
 
       {/* ------------ MESSAGE AREA ------------ */}
       <div
-        className="flex-1 overflow-y-auto p-5 space-y-6 hide-scrollbar bg-amber-100"
+        className="flex-1 overflow-y-auto p-5 space-y-6 hide-scrollbar"
         style={{ maxHeight: "calc(80vh )" }}
       >
         {messages.map((msg, idx) => (

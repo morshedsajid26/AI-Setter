@@ -15,8 +15,8 @@ export default function ActiveLeads({ data }) {
   }
 
   return (
-    <div className="p-6 space-y-6 bg-white h-[85vh] font-inter overflow-scroll hide-scrollbar">
-      {/* Title */}
+    <div className="p-6 space-y-6 bg-white max-h-[85vh] font-inter overflow-scroll hide-scrollbar">
+      {/* Title */}   
       <div>
         <h2 className="font-semibold text-lg text-[#0F172A]">Lead Details</h2>
         <p className="text-sm text-[#94A3B8]">CRM Information</p>
