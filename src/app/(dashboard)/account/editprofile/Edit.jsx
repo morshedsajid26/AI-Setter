@@ -197,6 +197,7 @@ const Edit = () => {
           <InputField
             type="text"
             className="col-span-6"
+            inputClass="rounded-lg"
             label="First Name"
             name="first_name"
             value={formData.first_name}
@@ -206,6 +207,7 @@ const Edit = () => {
           <InputField
             type="text"
             className="col-span-6"
+            inputClass="rounded-lg"
             label="Last Name"
             name="last_name"
             value={formData.last_name}
@@ -215,6 +217,7 @@ const Edit = () => {
           <InputField
             type="email"
             className="col-span-12"
+            inputClass="rounded-lg"
             label="Email"
             name="email"
             value={formData.email}
@@ -224,6 +227,7 @@ const Edit = () => {
           <InputField
             type="text"
             className="col-span-12"
+            inputClass="rounded-lg"
             label="Business Name"
             name="business_name"
             value={formData.business_name}
@@ -233,6 +237,7 @@ const Edit = () => {
           <InputField
             type="text"
             className="col-span-12"
+            inputClass="rounded-lg"
             label="Website"
             name="website"
             value={formData.website}
@@ -244,7 +249,7 @@ const Edit = () => {
         <div className="flex justify-center">
           <button
             disabled={loading}
-            className="bg-[#900616] py-2 px-12 rounded-lg text-white mt-6 disabled:opacity-60"
+            className="bg-[#900616] py-3 px-12 rounded-lg text-white mt-6 disabled:opacity-60"
           >
             {loading ? "Saving..." : "Save Changes"}
           </button>

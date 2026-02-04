@@ -214,26 +214,27 @@ const Leads = () => {
 
       {/* ---- CARDS ---- */}
       <div className="grid grid-cols-12 gap-6 mt-8">
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Total Leads</p>
           <p className="text-2xl mt-6">{totalLeads}</p>
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Hot Leads</p>
           <p className="text-2xl mt-6">{hotLeads}</p>
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Avg. score</p>
           <p className="text-2xl mt-6">{avgScore}</p>
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Synced to hubspot</p>
           <p className="text-2xl mt-6">{syncedCount}</p>
         </div>
 
         {/* ---- SEARCH + FILTER (UNCHANGED) ---- */}
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 p-4 flex justify-between gap-40 items-center">
-          <div className="relative w-[50%]">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 p-4 flex flex-col
+        md:flex-row justify-between md:gap-40 gap-5 items-center">
+          <div className="relative md:w-[50%] w-full">
             <input
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full py-2.5 pl-10 pr-3 bg-[#F3F3F5] rounded-lg outline-none"
@@ -242,7 +243,7 @@ const Leads = () => {
             <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2" />
           </div>
 
-          <div className="flex gap-5 w-[50%] justify-end">
+          <div className="flex gap-5 md:w-[50%] justify-end">
             {["all", "hot", "warm", "cold", "nurture"].map((s) => (
               <button
                 key={s}
@@ -260,7 +261,7 @@ const Leads = () => {
         </div>
 
         {/* ---- TABLE ---- */}
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 p-4 overflow-auto">
           <Table TableHeads={TableHeads} TableRows={filteredData} />
         </div>
       </div>

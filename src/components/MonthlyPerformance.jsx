@@ -11,11 +11,18 @@ import {
 } from "recharts";
 
 const data = [
+  { name: "Jan", booked: 120, qualified: 310, dms: 900 },
+  { name: "Feb", booked: 150, qualified: 345, dms: 1050 },
+  { name: "March", booked: 140, qualified: 330, dms: 980 },
+  { name: "April", booked: 175, qualified: 380, dms: 1150 },
+  { name: "May", booked: 190, qualified: 395, dms: 1300 },
+  { name: "Jun", booked: 120, qualified: 310, dms: 900 },
   { name: "Jul", booked: 120, qualified: 310, dms: 900 },
   { name: "Aug", booked: 150, qualified: 345, dms: 1050 },
   { name: "Sep", booked: 140, qualified: 330, dms: 980 },
   { name: "Oct", booked: 175, qualified: 380, dms: 1150 },
   { name: "Nov", booked: 190, qualified: 395, dms: 1300 },
+  { name: "Dec", booked: 120, qualified: 310, dms: 900 },
 ];
 
 export default function MonthlyPerformance() {

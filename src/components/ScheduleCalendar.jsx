@@ -18,9 +18,10 @@ export default function ScheduleCalendar() {
   const [tiktokConnected, setTiktokConnected] = useState(true);
 
   return (
-    <div className="grid grid-cols-3 gap-6 mt-5">
+    <div className="grid grid-cols-12 gap-6 mt-5">
       {/* Instagram */}
       <BookingConnectionCard
+      className={`col-span-12 md:col-span-4`}
         icon={calendly}
         title="Calendly"
         description="Share your Calendly booking links"
@@ -33,6 +34,7 @@ export default function ScheduleCalendar() {
 
       {/* Facebook */}
       <BookingConnectionCard
+      className={`col-span-12 md:col-span-4`}
         icon={calendar}
         title="Cal.com"
         description="Open-source scheduling platform"
@@ -45,6 +47,7 @@ export default function ScheduleCalendar() {
 
       {/* Linkedin */}
       <BookingConnectionCard
+      className={`col-span-12 md:col-span-4`}
         icon={calendly}
         title="Calendly"
         description="Share your Calendly booking links"

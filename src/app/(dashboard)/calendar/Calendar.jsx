@@ -136,28 +136,28 @@ export default function Calendar() {
       {/* GRID */}
       <div className="grid grid-cols-12 gap-6 mt-8">
         {/* SUMMARY CARDS */}
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p className="font-inter text-[#0F172B]">Today Booking</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             {bookings.filter((b) => isToday(b.date)).length}
           </p>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p className="font-inter text-[#0F172B]">This Week</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             {bookings.filter((b) => isThisWeek(b.date)).length}
           </p>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p className="font-inter text-[#0F172B]">This Month</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             {bookings.filter((b) => isThisMonth(b.date)).length}
           </p>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <p className="font-inter text-[#0F172B]">No Show Rate</p>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-6">
             4.2%

@@ -30,7 +30,7 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-12 gap-5 mt-4">
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B] ">Total Messages</p>
             <LuMessageSquare className="w-6 h-6 text-[#0F172B]" />
@@ -44,7 +44,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B] ">Leads Identified</p>
             <FiUsers className="w-6 h-6 text-[#0F172B]" />
@@ -58,7 +58,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B] ">Bookings</p>
             <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
@@ -72,7 +72,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B]">Conversion Rate</p>
             <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
@@ -86,23 +86,23 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl  col-span-12 md:col-span-6 p-4">
           <p className="font-inter text-[#0A0A0A]">Message Volume</p>
           <p className="font-inter text-[#717182] mt-1 mb-8"> Messages received over the last 7 days</p>
 
           <MessageVolumeChart />
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-6 p-4">
           <p className="font-inter text-[#0A0A0A]">Bookings Over Time</p>
           <p className="font-inter text-[#717182] mt-1 mb-8"> Weekly booking trends this month</p>
 
           <WeeklyBookingBar/>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-lg col-span-8 p-4">
+        <div className="bg-[#FFFFFF] rounded-lg col-span-12 md:col-span-8 p-4">
           <RecentActivity />
         </div>
-        <div className="col-span-4 ">
+        <div className=" col-span-12 md:col-span-4 ">
           <div className="bg-[#FFFFFF] rounded-lg p-6">
 
             <ChannelConnect/>

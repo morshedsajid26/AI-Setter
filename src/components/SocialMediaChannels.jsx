@@ -2,11 +2,7 @@
 import SocialAccountCard from "./SocialAccountCard";
 import { useState } from "react";
 import { AiFillTikTok } from "react-icons/ai";
-import {
-  FaInstagram,
-  FaFacebook,
-  FaLinkedin,
-} from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 export default function SocialMediaChannels() {
   const [instagramConnected, setInstagramConnected] = useState(false);
@@ -15,9 +11,10 @@ export default function SocialMediaChannels() {
   const [tiktokConnected, setTiktokConnected] = useState(true);
 
   return (
-    <div className="grid grid-cols-2 gap-6 mt-5">
+    <div className="grid grid-cols-12 gap-6 mt-5">
       {/* Instagram */}
       <SocialAccountCard
+        className={`col-span-12 md:col-span-6`}
         icon={<FaInstagram className="text-[#F6339A]" />}
         title="Instagram"
         description="Connect your Instagram account to manage your DMs."
@@ -31,6 +28,7 @@ export default function SocialMediaChannels() {
 
       {/* Facebook */}
       <SocialAccountCard
+        className={`col-span-12 md:col-span-6`}
         icon={<FaFacebook className="text-[#155DFC]" />}
         title="Facebook"
         description="Connect your Facebook account to manage messages."
@@ -44,6 +42,7 @@ export default function SocialMediaChannels() {
 
       {/* Linkedin */}
       <SocialAccountCard
+        className={`col-span-12 md:col-span-6`}
         icon={<FaLinkedin className="text-[#155DFC]" />}
         title="Linkedin"
         description="Connect LinkedIn to manage professional connections"
@@ -57,6 +56,7 @@ export default function SocialMediaChannels() {
 
       {/* Tiktok */}
       <SocialAccountCard
+        className={`col-span-12 md:col-span-6`}
         icon={<AiFillTikTok className=" w-10 h-10 text-[#1D293D]" />}
         title="TikTok"
         description="Manage TikTok DMs and comments"

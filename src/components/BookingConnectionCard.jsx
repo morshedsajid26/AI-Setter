@@ -14,10 +14,11 @@ export default function BookingConnectionCard({
   onDisconnect,
   onSettings,
   connectButton,
-  bookingUrl
+  bookingUrl,
+  className
 }) {
   return (
-    <div className="bg-white rounded-2xl p-6 border border-[#E5E7EB] w-full">
+    <div className={`bg-white rounded-2xl p-6 border border-[#E5E7EB] w-full ${className}`}>
       {/* Header Row */}
       <div className="flex justify-between items-start">
         

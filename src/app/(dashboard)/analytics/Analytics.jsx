@@ -20,7 +20,7 @@ const Analytics = () => {
 
       {/* GRID */}
       <div className="grid grid-cols-12 gap-6 mt-4">
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-3 p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B]"> Conversation Rate</p>
           </div>
@@ -33,7 +33,7 @@ const Analytics = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-3 p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B]">Avg Response Time</p>
           </div>
@@ -46,7 +46,7 @@ const Analytics = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-3 p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B]">AI Performance</p>
           </div>
@@ -59,7 +59,7 @@ const Analytics = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-3 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-3 p-4">
           <div className="flex items-center justify-between">
             <p className="font-inter text-[#0F172B]">HubSpot Syncs</p>
           </div>
@@ -108,7 +108,7 @@ const Analytics = () => {
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 p-6">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-6 p-6">
           <div className="mb-6">
             <p className="font-inter text-[#0A0A0A]">Monthly Performance</p>
             <p className="font-inter text-[#717182] mt-2">
@@ -118,7 +118,7 @@ const Analytics = () => {
           <MonthlyPerformance />
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 p-6">
+        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-6 p-6">
           <div className="mb-6">
             <p className="font-inter text-[#0A0A0A]">Source Breakdown</p>
             <p className="font-inter text-[#717182] mt-2">

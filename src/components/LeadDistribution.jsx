@@ -10,7 +10,7 @@ const data = [
 
 export default function LeadDistribution() {
   return (
-    <div className="flex items-center gap-20 font-inter">
+    <div className="flex flex-col md:flex-row items-center md:gap-20 font-inter">
       {/* Doughnut Chart */}
       <div style={{ width: 260, height: 260 }}>
         <ResponsiveContainer>
@@ -20,6 +20,7 @@ export default function LeadDistribution() {
               cx="50%"
               cy="50%"
               innerRadius={70}
+              resposiveInnerRadius={50}
               outerRadius={110}
               paddingAngle={4}
               dataKey="value"

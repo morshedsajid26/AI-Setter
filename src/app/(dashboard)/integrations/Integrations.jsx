@@ -40,7 +40,7 @@ const Integrations = () => {
         <p className="font-inter text-[#0F172B] font-semibold">
           Active Integrations
         </p>
-        <div className="bg-white p-6 rounded-2xl mt-5">
+        <div className="bg-white p-6 rounded-2xl mt-5 overflow-auto">
           <IntegrationTable />
         </div>
       </div>

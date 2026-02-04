@@ -90,7 +90,7 @@ const Profile = () => {
         </div>
 
         {/* ================= FORM ================= */}
-        <form className="grid grid-cols-12 gap-x-10 gap-y-6">
+        <form className="grid grid-cols-12 gap-5 md:gap-x-10 gap-y-6">
           <InputField
             className="col-span-6"
             inputClass="rounded-lg"
