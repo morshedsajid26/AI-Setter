@@ -6,6 +6,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { BASE_URL } from "@/src/config/api";
+import { useRouter } from "next/navigation";
+
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -15,6 +17,7 @@ const Edit = () => {
   const [preview, setPreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -132,6 +135,10 @@ const Edit = () => {
       });
 
       toast.success("Profile updated successfully");
+
+     setTimeout(() => {
+          router.push("/account");
+        }, 600);
       
     } catch (err) {
       console.error("UPDATE ERROR:", err.response?.data);
