@@ -127,13 +127,13 @@ export default function ChatWindow({ data }) {
 
       {/* ------------ MESSAGE AREA ------------ */}
       <div
-        className="flex-1 overflow-y-auto p-5 space-y-6 hide-scrollbar"
+        className="flex-1 overflow-y-auto p-5 space-y-2 hide-scrollbar"
         style={{ maxHeight: "calc(80vh )" }}
       >
         {messages.map((msg, idx) => (
           <div key={idx} className="flex flex-col">
             {msg.from === "assistant" && (
-              <p className="text-xs text-[#94A3B8] mb-1">
+              <p className="text-xs text-[#94A3B8] mb-1 text-end">
                 AI Assistant
               </p>
             )}
@@ -148,8 +148,8 @@ export default function ChatWindow({ data }) {
               style={{
                 alignSelf:
                   msg.from === "assistant"
-                    ? "flex-start"
-                    : "flex-end",
+                  ? "flex-end"
+                  : "flex-start",
               }}
             >
               {msg.text}
@@ -160,8 +160,8 @@ export default function ChatWindow({ data }) {
               style={{
                 alignSelf:
                   msg.from === "assistant"
-                    ? "flex-start"
-                    : "flex-end",
+                    ? "flex-end"
+                    : "flex-start",
               }}
             >
               {msg.time}
@@ -169,7 +169,7 @@ export default function ChatWindow({ data }) {
           </div>
         ))}
 
-        <div ref={bottomRef} />
+        {/* <div ref={bottomRef} /> */}
       </div>
 
       {/* ---------------- CTA CARD ---------------- */}
