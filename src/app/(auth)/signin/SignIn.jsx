@@ -44,7 +44,7 @@ const SignIn = () => {
         //  Small delay for UX
         setTimeout(() => {
           router.push("/dashboard");
-        }, 800);
+        }, 600);
       }
     } catch (err) {
         toast.error(
