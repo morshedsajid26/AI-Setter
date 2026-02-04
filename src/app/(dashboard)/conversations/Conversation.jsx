@@ -9,6 +9,7 @@ import ConversationList from "@/src/components/ConversationList";
 import ChatWindow from "@/src/components/ChatWindow";
 import ActiveLeads from "@/src/components/ActiveLeads";
 import { BASE_URL } from "@/src/config/api";
+import { formatLastMessageTime } from "@/src/utils/formatLastMessageTime";
 
 export default function Conversation() {
   const [conversations, setConversations] = useState([]);
@@ -36,9 +37,10 @@ export default function Conversation() {
           name: item.client_name || "Unknown",
           platform: item.source?.platform || "facebook",
           lastMessage: item.last_message || "No messages yet",
-          lastMessageAt: "just now",
+          lastMessageAt: formatLastMessageTime(item.lead?.last_response),
 
-          // ✅ ADD SCORE FOR CONVERSATION LIST
+
+          //  ADD SCORE FOR CONVERSATION LIST
           score: item.lead?.score ?? 0,
           unread: 0,
 
@@ -83,7 +85,7 @@ export default function Conversation() {
   /* ---------------- FETCH SINGLE CONVERSATION ---------------- */
   const handleSelectConversation = async (conversation) => {
     try {
-      // ✅ PRESERVE SCORE + LEAD DETAILS
+      //  PRESERVE SCORE + LEAD DETAILS
       setActiveConversation({
         ...conversation,
         score: conversation.score ?? 0,
@@ -96,7 +98,7 @@ export default function Conversation() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       const apiMessages = res.data?.messages || [];
@@ -113,7 +115,7 @@ export default function Conversation() {
         }),
       }));
 
-      // ✅ UPDATE ONLY MESSAGES (DON’T DROP SCORE)
+      //  UPDATE ONLY MESSAGES (DON’T DROP SCORE)
       setActiveConversation((prev) => ({
         ...prev,
         messages: normalizedMessages,
@@ -129,9 +131,7 @@ export default function Conversation() {
 
   if (conversations.length === 0) {
     return (
-      <div className="p-6 bg-white text-gray-500">
-        No conversations found
-      </div>
+      <div className="p-6 bg-white text-gray-500">No conversations found</div>
     );
   }
 

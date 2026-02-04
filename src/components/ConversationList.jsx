@@ -88,7 +88,9 @@ export default function ConversationList({
 
       {/* PLATFORM FILTERS */}
       <div className="flex my-3 gap-5 overflow-x-scroll">
-        {["instagram", "facebook", "linkedin", "tiktok"].map(
+        {["instagram", "facebook", 
+        // "linkedin", 
+        "tiktok"].map(
           (p) => (
             <button
               key={p}
@@ -162,7 +164,7 @@ export default function ConversationList({
                 </span>
               </div>
 
-              <p className="text-[#45556C] text-sm mt-1">
+              <p className="text-[#45556C] text-sm mt-1 line-clamp-1">
                 {item.lastMessage}
               </p>
 
