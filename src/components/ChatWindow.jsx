@@ -71,7 +71,7 @@ export default function ChatWindow({ data }) {
     <div className="flex flex-col justify-between bg-white font-inter h-full overflow-scroll hide-scrollbar">
       {/* ---------------- HEADER ---------------- */}
       <div className="p-4 bg-white flex items-center gap-3 ">
-        <div className="w-10 h-10 bg-[#900616] text-white rounded-full flex items-center justify-center font-semibold">
+        <div className="w-10 h-10 bg-[#900616] text-white rounded-full flex items-center justify-center font-semibold capitalize">
           {initials}
         </div>
 

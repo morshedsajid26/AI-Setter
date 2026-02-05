@@ -126,7 +126,7 @@ const sortedData = useMemo(() => {
               }`}
           >
             {/* AVATAR */}
-            <div className="w-12 h-12 bg-[#BE0016] text-white rounded-full flex items-center justify-center font-semibold">
+            <div className="w-12 h-12 bg-[#BE0016] text-white rounded-full flex items-center justify-center font-semibold capitalize">
               {(item.name || "U")
                 .split(" ")
                 .map((w) => w[0])
