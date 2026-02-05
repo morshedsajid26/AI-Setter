@@ -115,7 +115,7 @@ const Leads = () => {
         const score = item.lead?.score ?? 0;
 
         return {
-          name: item.client_name,
+          name: item.client_name || item.client_external_id || "Unknown",
           username: item.client_external_id,
           platform: item.source?.platform?.includes("facebook")
             ? "facebook"

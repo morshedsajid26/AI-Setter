@@ -11,11 +11,7 @@ const normalizePlatform = (platform = "") => {
   return "facebook";
 };
 
-export default function ConversationList({
-  data = [],
-  onSelect,
-  activeId,
-}) {
+export default function ConversationList({ data = [], onSelect, activeId }) {
   const [platformFilter, setPlatformFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -32,33 +28,33 @@ export default function ConversationList({
   }, [data]);
 
   /* -------- TIME SORT -------- */
-  const convertToDate = (timeAgo = "") => {
-    const now = new Date();
-    if (timeAgo.includes("m ago"))
-      return new Date(now - parseInt(timeAgo) * 60000);
-    if (timeAgo.includes("h ago"))
-      return new Date(now - parseInt(timeAgo) * 3600000);
-    if (timeAgo.includes("d ago"))
-      return new Date(now - parseInt(timeAgo) * 86400000);
-    return now;
-  };
+  // const convertToDate = (timeAgo = "") => {
+  //   const now = new Date();
+  //   if (timeAgo.includes("m ago"))
+  //     return new Date(now - parseInt(timeAgo) * 60000);
+  //   if (timeAgo.includes("h ago"))
+  //     return new Date(now - parseInt(timeAgo) * 3600000);
+  //   if (timeAgo.includes("d ago"))
+  //     return new Date(now - parseInt(timeAgo) * 86400000);
+  //   return now;
+  // };
 
-  const sortedData = useMemo(() => {
-    return [...safeData].sort(
-      (a, b) =>
-        convertToDate(b.lastMessageAt) -
-        convertToDate(a.lastMessageAt)
-    );
-  }, [safeData]);
+  /* -------- TIME SORT (CORRECT) -------- */
+const sortedData = useMemo(() => {
+  return [...safeData].sort(
+    (a, b) =>
+      new Date(b.lastMessageAt) -
+      new Date(a.lastMessageAt)
+  );
+}, [safeData]);
+
 
   /* -------- FILTER -------- */
   const filteredData = useMemo(() => {
     let result = sortedData;
 
     if (platformFilter !== "all") {
-      result = result.filter(
-        (item) => item.platform === platformFilter
-      );
+      result = result.filter((item) => item.platform === platformFilter);
     }
 
     if (searchTerm.trim()) {
@@ -67,7 +63,7 @@ export default function ConversationList({
         (item) =>
           (item.name || "").toLowerCase().includes(t) ||
           (item.username || "").toLowerCase().includes(t) ||
-          (item.platform || "").toLowerCase().includes(t)
+          (item.platform || "").toLowerCase().includes(t),
       );
     }
 
@@ -76,6 +72,9 @@ export default function ConversationList({
 
   return (
     <div className="font-inter ">
+      <h1 className="capitalize font-inter text-[#000000] text-2xl  px-2 py-3">
+        Conversations
+      </h1>
       {/* SEARCH */}
       <div className="mt-3 relative">
         <input
@@ -88,32 +87,29 @@ export default function ConversationList({
 
       {/* PLATFORM FILTERS */}
       <div className="flex my-3 gap-5 overflow-x-scroll">
-        {["instagram", "facebook", 
-        // "linkedin", 
-        "tiktok"].map(
-          (p) => (
-            <button
-              key={p}
-              onClick={() =>
-                setPlatformFilter(
-                  platformFilter === p ? "all" : p
-                )
-              }
-              className={`flex items-center gap-2 border p-2.5 rounded-lg
+        {[
+          "instagram",
+          "facebook",
+          // "linkedin",
+          "tiktok",
+        ].map((p) => (
+          <button
+            key={p}
+            onClick={() => setPlatformFilter(platformFilter === p ? "all" : p)}
+            className={`flex items-center gap-2 border p-2.5 rounded-lg
                 ${
                   platformFilter === p
                     ? "bg-[#900616] text-white"
                     : "border-black/10 text-[#0A0A0A]"
                 }`}
-            >
-              {p === "instagram" && <FiInstagram />}
-              {p === "facebook" && <FiFacebook />}
-              {p === "linkedin" && <FiLinkedin />}
-              {p === "tiktok" && <FaTiktok />}
-              {p.charAt(0).toUpperCase() + p.slice(1)}
-            </button>
-          )
-        )}
+          >
+            {p === "instagram" && <FiInstagram />}
+            {p === "facebook" && <FiFacebook />}
+            {p === "linkedin" && <FiLinkedin />}
+            {p === "tiktok" && <FaTiktok />}
+            {p.charAt(0).toUpperCase() + p.slice(1)}
+          </button>
+        ))}
       </div>
 
       {/* LIST */}
@@ -141,9 +137,7 @@ export default function ConversationList({
             <div className="flex-1">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#0F172B]">
-                    {item.name}
-                  </span>
+                  <span className="text-[#0F172B]">{item.name}</span>
 
                   {item.platform === "instagram" && (
                     <FaInstagram className="text-pink-500" />

@@ -34,7 +34,7 @@ export default function Conversation() {
           id: item.id,
 
           // LEFT LIST
-          name: item.client_name || "Unknown",
+          name: item.client_name || item.client_external_id || "Unknown",
           platform: item.source?.platform || "facebook",
           lastMessage: item.last_message || "No messages yet",
           lastMessageAt: formatLastMessageTime(item.lead?.last_response),
@@ -73,7 +73,7 @@ export default function Conversation() {
           handleSelectConversation(normalized[0]);
         }
       } catch (err) {
-        console.error("Conversation fetch error ❌", err);
+        console.error("Conversation fetch error ", err);
       } finally {
         setLoading(false);
       }
@@ -121,7 +121,7 @@ export default function Conversation() {
         messages: normalizedMessages,
       }));
     } catch (err) {
-      console.error("Single conversation fetch error ❌", err);
+      console.error("Single conversation fetch error ", err);
     }
   };
 
@@ -135,10 +135,12 @@ export default function Conversation() {
     );
   }
 
+  
+
   return (
     <div className="grid grid-cols-12 gap-1">
       <div className="col-span-3 bg-white p-2">
-        <Bredcumb />
+        {/* <Bredcumb /> */}
         <ConversationList
           data={conversations}
           activeId={activeConversation?.id}

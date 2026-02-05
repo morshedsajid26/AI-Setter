@@ -31,7 +31,6 @@ export default function ChatWindow({ data }) {
   const [messages, setMessages] = useState(
     buildInitialMessages(data)
   );
-  const [input, setInput] = useState("");
 
   /* ---------------- RELOAD WHEN CONVERSATION CHANGES ---------------- */
   useEffect(() => {
@@ -51,23 +50,7 @@ export default function ChatWindow({ data }) {
     );
   }
 
-  /* ---------------- SEND MESSAGE (UI ONLY) ---------------- */
-  const sendMessage = () => {
-    if (!input.trim()) return;
-
-    const newMsg = {
-      from: "user",
-      text: input,
-      time: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    };
-
-    setMessages((prev) => [...prev, newMsg]);
-    setInput("");
-  };
-
+  
   /* ---------------- PLATFORM NORMALIZE ---------------- */
   const platform =
     data.platform?.includes("instagram")
@@ -127,7 +110,7 @@ export default function ChatWindow({ data }) {
 
       {/* ------------ MESSAGE AREA ------------ */}
       <div
-        className="flex-1 overflow-y-auto p-5 space-y-2 hide-scrollbar"
+        className="flex-1 overflow-y-auto p-5 space-y-2 hide-scrollbar "
         style={{ maxHeight: "calc(80vh )" }}
       >
         {messages.map((msg, idx) => (
@@ -169,64 +152,10 @@ export default function ChatWindow({ data }) {
           </div>
         ))}
 
-        {/* <div ref={bottomRef} /> */}
+        <div ref={bottomRef} />
       </div>
 
-      {/* ---------------- CTA CARD ---------------- */}
-      {/* <div className="bg-[#E7FDEB] border border-[#B9F8CF] p-5 rounded-lg m-4 mt-2 flex justify-between">
-        <div>
-          <h3 className="font-semibold text-[#0E5135] text-[15px] mb-1">
-            Ready to book a discovery call?
-          </h3>
-          <p className="text-sm text-[#0E5135]">
-            15–20 minute intro session
-          </p>
-        </div>
-
-        <button className="px-5 py-2 bg-[#00A63E] hover:bg-[#00A63E]/80 text-white font-medium rounded-lg transition-all duration-300 cursor-pointer">
-          Schedule
-        </button>
-      </div> */}
-
-      {/* ---------------- QUICK ACTION BUTTONS ---------------- */}
-      {/* <div className="flex flex-wrap gap-3 px-4">
-        <button className="border px-4 py-2 rounded-full text-sm text-[#334155]">
-          Send pricing info
-        </button>
-        <button className="border px-4 py-2 rounded-full text-sm text-[#334155]">
-          Share testimonials
-        </button>
-        <button className="border px-4 py-2 rounded-full text-sm text-[#334155]">
-          Explain program details
-        </button>
-      </div> */}
-
-      {/* ---------------- INPUT BAR ---------------- */}
-      {/* <div className="p-4 bg-white">
-        <div className="flex items-center gap-3 bg-[#EEF1F5] px-4 py-3 rounded-full">
-          <input
-            className="flex-1 bg-transparent outline-none text-sm text-[#717182] placeholder:text-[#717182]"
-            placeholder="Type a message... (AI will review before sending)"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) =>
-              e.key === "Enter" && sendMessage()
-            }
-          />
-
-          <button
-            className="text-[#900616]"
-            onClick={sendMessage}
-          >
-            <FiSend size={20} />
-          </button>
-        </div>
-
-        <p className="text-xs mt-2 text-[#94A3B8]">
-          AI Assistant is active — responses are automated but
-          you can override anytime
-        </p>
-      </div> */}
+      
     </div>
   );
 }
