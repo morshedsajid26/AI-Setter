@@ -1,5 +1,6 @@
+"use client";
 import Bredcumb from "@/src/components/Bredcumb";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { LuMessageSquare } from "react-icons/lu";
 import { GoArrowDownRight, GoArrowUpRight } from "react-icons/go";
@@ -10,8 +11,38 @@ import WeeklyBookingBar from "@/src/components/WeeklyBooking";
 import RecentActivity from "@/src/components/RecentActivity";
 import { SiTicktick } from "react-icons/si";
 import ChannelConnect from "@/src/components/ChannelConnect";
+import axios from "axios";
+import { BASE_URL } from "@/src/config/api";
+import Cookies from "js-cookie";
 
 const Dashboard = () => {
+
+
+  const [dashboardData, setDashboardData] = useState(null);
+const [loading, setLoading] = useState(true);
+
+const token = Cookies.get("accessToken");
+
+  useEffect(() => {
+  const fetchDashboard = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/dashboard`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setDashboardData(res.data);
+    } catch (error) {
+      console.error("Dashboard fetch error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchDashboard();
+}, []);
+
   return (
     <div>
       <div className=" flex items-center justify-between">
@@ -36,7 +67,7 @@ const Dashboard = () => {
             <LuMessageSquare className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-            1,200
+            {dashboardData?.total_message ?? 0}
           </p>
           <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
@@ -50,7 +81,7 @@ const Dashboard = () => {
             <FiUsers className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-            20
+            {dashboardData?.total_leads ?? 0}
           </p>
           <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
@@ -90,7 +121,7 @@ const Dashboard = () => {
           <p className="font-inter text-[#0A0A0A]">Message Volume</p>
           <p className="font-inter text-[#717182] mt-1 mb-8"> Messages received over the last 7 days</p>
 
-          <MessageVolumeChart />
+          <MessageVolumeChart  data={dashboardData?.data || []} />
         </div>
         <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-6 p-4">
           <p className="font-inter text-[#0A0A0A]">Bookings Over Time</p>
