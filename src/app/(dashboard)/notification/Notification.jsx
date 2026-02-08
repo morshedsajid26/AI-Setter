@@ -1,79 +1,24 @@
 "use client";
 import Bredcumb from "@/src/components/Bredcumb";
 import Pagination from "@/src/components/Pagination";
-import { usePathname } from "next/navigation";
+import { BASE_URL } from "@/src/config/api";
+import { useNotification } from "@/src/context/NotificationContext";
 import React, { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
 const Notification = () => {
-  const [baseOnTitle, setBaseOnTitle] = useState([]);
+  /* -------------------- Context -------------------- */
+  const { notifications, handleApprove, handleReject, markAsRead } = useNotification();
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [popOpen, setPopOpen] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState(null);
 
-  const pageItems = [
-    {
-      message: " Facebook API token expired — reconnect required.”",
-      time: "2025-01-10T10:00:00",
-    },
-    {
-      message: "New Discovery Call booked by James for Monday 4 PM”",
-      time: "2025-01-10T11:00:00",
-    },
-
-    {
-      message: "AI detected Mindset Issue for user Rafi (Instagram)”",
-      time: "2024-01-10T12:00:00",
-    },
-    {
-      message: "New DM from Roni on Instagram: “Hey I need help…",
-      time: "2025-01-10T10:00:00",
-    },
-    {
-      message: "New Discovery Call booked by James for Monday 4 PM”",
-      time: "2025-01-10T11:00:00",
-    },
-
-    {
-      message: " Facebook API token expired — reconnect required.”",
-      time: "2024-01-10T12:00:00",
-    },
-    {
-      message: "New DM from Roni on Instagram: “Hey I need help…",
-      time: "2025-01-10T10:00:00",
-    },
-    {
-      message: " Facebook API token expired — reconnect required.”",
-      time: "2025-01-10T11:00:00",
-    },
-
-    {
-      message: " Facebook API token expired — reconnect required.”",
-      time: "2025-01-10T11:00:00",
-    },
-    {
-      message: " Facebook API token expired — reconnect required.”",
-      time: "2025-01-10T11:00:00",
-    },
-
-    {
-      message: " Facebook API token expired — reconnect required.”",
-      time: "2025-01-10T11:00:00",
-    },
-
-    {
-      message: " Facebook API token expired — reconnect required.”",
-      time: "2025-01-10T11:00:00",
-    },
-  ];
-
-  // Set data for pagination
   useEffect(() => {
-    setBaseOnTitle(pageItems);
+    markAsRead();
   }, []);
 
-  const pathname = usePathname();
-  const pathParts = (pathname || "/").split("/").filter(Boolean);
-
+  /* -------------------- Time Ago Function -------------------- */
   function timeAgo(timestamp) {
     if (!timestamp) return "";
 
@@ -91,42 +36,44 @@ const Notification = () => {
     return `${diffDay} days ago`;
   }
 
-  // Pagination setup
+  /* -------------------- Pagination -------------------- */
   const itemsPerPage = 10;
-  const totalPages = Math.ceil(baseOnTitle.length / itemsPerPage);
+  const totalPages = Math.ceil(notifications.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = baseOnTitle.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = notifications.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
-    <div className="w-full p-7 bg-white  overflow-x-auto rounded-[10px]">
-      {/* Header */}
+    <div className="w-full p-7 bg-white overflow-x-auto rounded-[10px]">
       <div className="flex items-center gap-[14px]">
         <Bredcumb />
       </div>
 
-      {/* Total Notifications */}
-      <div>
-        <p className="text-[#333333]  text-[16px] font-inter font-semibold mt-[21px]">
-          Total {baseOnTitle.length} Notifications
-        </p>
-      </div>
+      <p className="text-[#333333] text-[16px] font-semibold mt-[21px]">
+        Total {notifications.length} Notifications
+      </p>
 
       {/* Notification List */}
       <div className="mt-6">
         {currentItems.map((item, index) => (
           <div
             key={index}
-            className="w-full hover:bg-[#FFCDD3]  transition-all duration-300 py-3 px-[25px] c"
+            className="w-full hover:bg-[#FFCDD3] transition-all duration-300 py-3 px-[25px]"
           >
             <div
-              onClick={() => setPopOpen(true)}
+              onClick={() => {
+                setSelectedNotification(item);
+                setPopOpen(true);
+              }}
               className="w-full flex items-center justify-between cursor-pointer"
             >
-              <p className="w-[80%] text-[#333333]   text-[16px] font-inter font-semibold">
+              <p className="w-[80%] text-[#333333] text-[16px] font-semibold">
                 {item.message}
               </p>
 
-              <p className="w-[10%] flex justify-end text-[#5C5C5C]  text-[16px] font-inter whitespace-nowrap">
+              <p className="w-[20%] flex justify-end text-[#5C5C5C] text-[14px] whitespace-nowrap">
                 {timeAgo(item.time)}
               </p>
             </div>
@@ -134,38 +81,50 @@ const Notification = () => {
         ))}
       </div>
 
-      {/* Pagination */}
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
 
-      {/* {popOpen && (
-        <div className="fixed inset-0  bg-[#D9D9D9]/80 flex items-center justify-center z-50 ">
-          <div className="bg-white rounded-4xl py-14 px-14 w-[30%]  ">
-
-            <div className="flex justify-end mb-5 ">
-                <FiX 
+      {/* Popup */}
+      {popOpen && selectedNotification && (
+        <div className="fixed inset-0 bg-[#00000050] flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl py-10 px-10 w-[30%]">
+            <div className="flex justify-end mb-5">
+              <FiX
                 onClick={() => setPopOpen(false)}
-                className="h-8 w-8 cursor-pointer"/>
+                className="h-6 w-6 cursor-pointer"
+              />
             </div>
-            
-        <p className="font-inter font-medium">A staff member has requested to void a transaction of +50 points for customer +8801xxxx.</p>
 
-            <div className="flex justify-center items-center gap-12 mt-10">
+            <p className="font-medium text-[16px]">
+              {selectedNotification.message}
+            </p>
+
+            <div className="flex justify-center items-center gap-10 mt-8">
               <button 
-               
-              className="border border-[#7AA3CC] text-[#010101] font-medium  font-inter py-3  px-12 rounded-lg cursor-pointer ">
-               Approve
+                onClick={() => {
+                   handleApprove(selectedNotification);
+                   setPopOpen(false);
+                }}
+                className="border border-[#7AA3CC] py-2 px-8 rounded-lg"
+              >
+                Approve
               </button>
-              <button className="bg-[#ED4539] border border-[#7AA3CC] text-[#010101] font-medium   font-inter py-3 px-12 rounded-lg cursor-pointer ">
+              <button 
+                onClick={() => {
+                   handleReject(selectedNotification);
+                   setPopOpen(false);
+                }}
+                className="bg-[#ED4539] text-white py-2 px-8 rounded-lg"
+              >
                 Reject
               </button>
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };

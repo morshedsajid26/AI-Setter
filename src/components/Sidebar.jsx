@@ -36,26 +36,26 @@ const navitems = [
     link: "/leads",
     icon: FiUsers ,
   },
-  {
-    name: "Calendar",
-    link: "/calendar",
-    icon: IoCalendarOutline,
-  },
-  {
-    name: "Analytics",
-    link: "/analytics",
-    icon: MdOutlineAnalytics,
-  },
-  {
-    name: "AI Settings",
-    link: "/ai/settings",
-    icon: IoSettingsOutline ,
-  },
-  {
-    name: "API & Integration",
-    link: "/integrations",
-    icon: LuPlug,
-  },
+  // {
+  //   name: "Calendar",
+  //   link: "/calendar",
+  //   icon: IoCalendarOutline,
+  // },
+  // {
+  //   name: "Analytics",
+  //   link: "/analytics",
+  //   icon: MdOutlineAnalytics,
+  // },
+  // {
+  //   name: "AI Settings",
+  //   link: "/ai/settings",
+  //   icon: IoSettingsOutline ,
+  // },
+  // {
+  //   name: "API & Integration",
+  //   link: "/integrations",
+  //   icon: LuPlug,
+  // },
   {
     name: "Account",
     link: "/account",
@@ -105,7 +105,8 @@ const Sidebar = () => {
         transition-transform  duration-300 ease-in-out overflow-scroll hide-scrollbar
         ${isOpen ? "translate-x-0 " : "-translate-x-full 2xl:translate-x-0"}`}
       >
-        {/* Logo */}
+        <div className="space-y-20">
+          {/* Logo */}
         <div className="flex justify-center ">
           <Image src={logo} alt="logo" />
           {/* <h3 className="font-inter text-[32px] font-bold">LOGO</h3> */}
@@ -142,6 +143,7 @@ const Sidebar = () => {
             );
           })}
         </ul>
+        </div>
 
         {/* Logout */}
         <div className="">

@@ -69,10 +69,10 @@ const token = Cookies.get("accessToken");
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
             {dashboardData?.total_message ?? 0}
           </p>
-          <div className="flex items-center gap-1 mt-2">
+          {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
             <p className="font-inter text-[#00A63E]">12%</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
@@ -83,10 +83,10 @@ const token = Cookies.get("accessToken");
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
             {dashboardData?.total_leads ?? 0}
           </p>
-          <div className="flex items-center gap-1 mt-2">
+          {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
             <p className="font-inter text-[#00A63E]">8%</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
@@ -95,12 +95,12 @@ const token = Cookies.get("accessToken");
             <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-           53
+          0
           </p>
-          <div className="flex items-center gap-1 mt-2">
+          {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
             <p className="font-inter text-[#00A63E]">18%</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
@@ -109,12 +109,12 @@ const token = Cookies.get("accessToken");
             <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-            1,200
+            0
           </p>
-          <div className="flex items-center gap-1 mt-2">
+          {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowDownRight className=" text-[#E7000B]" />
             <p className="font-inter text-[#E7000B]">12%</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="bg-[#FFFFFF] rounded-2xl  col-span-12 md:col-span-6 p-4">
