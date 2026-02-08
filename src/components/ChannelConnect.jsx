@@ -36,8 +36,8 @@ const ChannelConnect = () => {
   const [channels, setChannels] = useState([
     { id: 1, type: "instagram", title: "Instagram", subtitle: "Not connected", status: "inactive" },
     { id: 2, type: "facebook", title: "Facebook", subtitle: "Not connected", status: "inactive" },
-    { id: 3, type: "linkedin", title: "LinkedIn", subtitle: "Not connected", status: "inactive" },
-    { id: 4, type: "tiktok", title: "TikTok", subtitle: "Not connected", status: "inactive" },
+    // { id: 3, type: "linkedin", title: "LinkedIn", subtitle: "Not connected", status: "inactive" },
+    // { id: 4, type: "tiktok", title: "TikTok", subtitle: "Not connected", status: "inactive" },
   ]);
 
   const toggleStatus = (id) => {
