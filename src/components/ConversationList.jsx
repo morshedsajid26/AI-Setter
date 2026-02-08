@@ -91,7 +91,7 @@ const sortedData = useMemo(() => {
           "instagram",
           "facebook",
           // "linkedin",
-          "tiktok",
+          // "tiktok",
         ].map((p) => (
           <button
             key={p}
