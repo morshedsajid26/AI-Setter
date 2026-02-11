@@ -86,12 +86,12 @@ const sortedData = useMemo(() => {
       </div>
 
       {/* PLATFORM FILTERS */}
-      <div className="flex my-3 gap-5 overflow-x-scroll">
+      <div className="flex my-3 gap-5 ">
         {[
           "instagram",
           "facebook",
           // "linkedin",
-          "tiktok",
+          // "tiktok",
         ].map((p) => (
           <button
             key={p}

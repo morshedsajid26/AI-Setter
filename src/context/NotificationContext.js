@@ -21,12 +21,12 @@ export const NotificationProvider = ({ children }) => {
     const maxRetries = 3;
 
     // FEATURE FLAG: Set to true when backend WebSocket endpoint is ready
-    const ENABLE_NOTIFICATIONS_WS = false; 
+    const ENABLE_NOTIFICATIONS_WS = true; 
 
     const connectSocket = () => {
       if (!BASE_URL || !ENABLE_NOTIFICATIONS_WS) return;
 
-      const wsUrl = BASE_URL.replace(/^http/, 'ws') + '/ws/notifications';
+      const wsUrl = BASE_URL.replace(/^http/, 'ws') + '/ws/notifications/';
       const socket = new WebSocket(wsUrl);
       socketRef.current = socket;
 
