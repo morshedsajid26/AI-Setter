@@ -29,10 +29,10 @@ export default function Layout({ children }) {
         <Link href="/account" className={linkClasses("/account")}>
           Profile
         </Link>
-
+{/* 
         <Link href="/account/notification" className={linkClasses("/account/notification")}>
           Notification
-        </Link>
+        </Link> */}
       </div>
 
       <div className="mt-6">{children}</div>
