@@ -5,7 +5,7 @@ import InputField from "@/src/components/InputField";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import { BASE_URL } from "@/src/config/api";
 
 
@@ -29,8 +29,8 @@ const handleSubmit = async (e) => {
   try {
     setLoading(true);
 
-    const res = await axios.post(
-      `${BASE_URL}/auth/forgot-password`,
+    const res = await axiosInstance.post(
+      `/auth/forgot-password`,
       { email }
     );
 

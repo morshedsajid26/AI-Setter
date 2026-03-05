@@ -6,7 +6,7 @@ import logo from "@/public/logo.png";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { useNotification } from "../context/NotificationContext";
 import Link from "next/link";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
 import { BASE_URL } from "@/src/config/api";
 import toast from "react-hot-toast";
@@ -20,7 +20,7 @@ const Topbar = () => {
       try {
         const token = Cookies.get("accessToken");
 
-        const res = await axios.get(`${BASE_URL}/auth/profile`, {
+        const res = await axiosInstance.get(`/auth/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

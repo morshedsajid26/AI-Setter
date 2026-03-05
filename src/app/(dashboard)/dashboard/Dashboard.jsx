@@ -11,7 +11,7 @@ import WeeklyBookingBar from "@/src/components/WeeklyBooking";
 import RecentActivity from "@/src/components/RecentActivity";
 import { SiTicktick } from "react-icons/si";
 import ChannelConnect from "@/src/components/ChannelConnect";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import { BASE_URL } from "@/src/config/api";
 import Cookies from "js-cookie";
 
@@ -26,7 +26,7 @@ const token = Cookies.get("accessToken");
   useEffect(() => {
   const fetchDashboard = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/dashboard`, {
+      const res = await axiosInstance.get(`/dashboard`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -10,7 +10,7 @@ import {
   FaLinkedinIn,
   FaSearch,
 } from "react-icons/fa";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
 import { BASE_URL } from "@/src/config/api";
 
@@ -104,8 +104,8 @@ const Leads = () => {
     const fetchLeads = async () => {
       const token = Cookies.get("accessToken");
 
-      const res = await axios.get(
-        `${BASE_URL}/conversation?page=1&size=10`,
+      const res = await axiosInstance.get(
+        `/conversation?page=1&size=10`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

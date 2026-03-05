@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Password from "@/src/components/Password";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import { BASE_URL } from "@/src/config/api";
 
 const NewPass = () => {
@@ -52,7 +52,7 @@ const NewPass = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(`${BASE_URL}/auth/reset-password`, {
+      const res = await axiosInstance.post(`/auth/reset-password`, {
         new_password: password,
         confirm_password: confirmPassword,
       });

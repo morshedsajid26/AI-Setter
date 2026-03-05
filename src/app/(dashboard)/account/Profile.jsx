@@ -3,7 +3,7 @@
 import InputField from "@/src/components/InputField";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
 import { BASE_URL } from "@/src/config/api";
 
@@ -18,7 +18,7 @@ const Profile = () => {
       try {
         const token = Cookies.get("accessToken");
 
-        const res = await axios.get(`${BASE_URL}/auth/profile`, {
+        const res = await axiosInstance.get(`/auth/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

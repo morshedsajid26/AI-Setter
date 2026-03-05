@@ -1,7 +1,7 @@
 "use client";
 import InputField from "@/src/components/InputField";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
 import { BASE_URL } from "@/src/config/api";
 
@@ -24,7 +24,7 @@ const Qualification = () => {
   /* ---------------- GET QUESTIONS ---------------- */
   const fetchQuestions = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/question`, {
+      const res = await axiosInstance.get(`/question`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setQuestions(res.data || []);
@@ -36,7 +36,7 @@ const Qualification = () => {
   /* ---------------- GET RULES ---------------- */
   const fetchRules = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/leadscore`, {
+      const res = await axiosInstance.get(`/leadscore`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRules(res.data || []);
@@ -54,8 +54,8 @@ const Qualification = () => {
   /* ---------------- ADD QUESTION ---------------- */
   const handleAddQuestion = async () => {
     try {
-      await axios.post(
-        `${BASE_URL}/question`,
+      await axiosInstance.post(
+        `/question`,
         { question },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -71,8 +71,8 @@ const Qualification = () => {
   /* ---------------- ADD RULE ---------------- */
   const handleAddRule = async () => {
     try {
-      await axios.post(
-        `${BASE_URL}/leadscore`,
+      await axiosInstance.post(
+        `/leadscore`,
         { title: ruleTitle, points: Number(rulePoints) },
         { headers: { Authorization: `Bearer ${token}` } }
       );

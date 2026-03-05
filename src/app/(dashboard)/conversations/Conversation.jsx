@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
 
 import Bredcumb from "@/src/components/Bredcumb";
@@ -22,7 +22,7 @@ export default function Conversation() {
   useEffect(() => {
     const fetchConversations = async () => {
       try {
-        const res = await axios.get(`${BASE_URL}/conversation`, {
+        const res = await axiosInstance.get(`/conversation`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -92,8 +92,8 @@ export default function Conversation() {
         messages: [],
       });
 
-      const res = await axios.get(
-        `${BASE_URL}/conversation/${conversation.id}`,
+      const res = await axiosInstance.get(
+        `/conversation/${conversation.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

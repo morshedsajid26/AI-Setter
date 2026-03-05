@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import InputField from "@/src/components/InputField";
 import Password from "@/src/components/Password";
 import Link from "next/link";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { BASE_URL } from "@/src/config/api";
@@ -26,7 +26,7 @@ const SignIn = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${BASE_URL}/auth/login`, {
+      const res = await axiosInstance.post(`/auth/login`, {
         email,
         password,
       });

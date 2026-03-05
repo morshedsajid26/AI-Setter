@@ -20,7 +20,7 @@ const Notification = () => {
       const token = Cookies.get("accessToken");
 
       const res = await fetch(
-        `${BASE_URL}/notifications?page=${page}`,
+        `/notifications?page=${page}`,
         {
           method: "GET",
           headers: {
@@ -49,7 +49,7 @@ const Notification = () => {
     try {
       const token = Cookies.get("accessToken");
 
-      await fetch(`${BASE_URL}/notifications/mark/${id}`, {
+      await fetch(`/notifications/mark/${id}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

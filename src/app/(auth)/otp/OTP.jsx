@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axiosInstance from "@/src/config/axios";
 import { BASE_URL } from "@/src/config/api";
 
 const OTP = () => {
@@ -65,7 +65,7 @@ const OTP = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(`${BASE_URL}/auth/verify-otp`, {
+      const res = await axiosInstance.post(`/auth/verify-otp`, {
         email,
         otp: otpValue, // ✅ STRING OTP
       });
