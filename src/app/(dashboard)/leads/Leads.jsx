@@ -9,6 +9,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaSearch,
+  FaYoutube,
 } from "react-icons/fa";
 import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
@@ -23,7 +24,7 @@ const Leads = () => {
   const ICONS = {
     instagram: <FaInstagram className="text-[#E60076] text-2xl" />,
     facebook: <FaFacebookF className="text-[#155DFC] text-2xl " />,
-    linkedin: <FaLinkedinIn className="text-[#1447E6] text-2xl" />,
+    youtube: <FaYoutube className="text-[#FF0000] text-2xl" />,
   };
 
   function PlatformCell(platform) {
@@ -121,7 +122,7 @@ const Leads = () => {
             ? "facebook"
             : item.source?.platform?.includes("instagram")
             ? "instagram"
-            : "linkedin",
+            : "youtube",
           score,
           status:
             score >= 80

@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
-import { FiFacebook, FiLinkedin, FiSend } from "react-icons/fi";
+import { FiFacebook, FiLinkedin, FiSend, FiYoutube } from "react-icons/fi";
 
 export default function ChatWindow({ data }) {
   const bottomRef = useRef(null);
@@ -50,16 +50,16 @@ export default function ChatWindow({ data }) {
     );
   }
 
-  
+
   /* ---------------- PLATFORM NORMALIZE ---------------- */
   const platform =
-    data.platform?.includes("instagram")
+    data.platform?.toLowerCase().includes("instagram")
       ? "instagram"
-      : data.platform?.includes("linkedin")
-      ? "linkedin"
-      : data.platform?.includes("tiktok")
-      ? "tiktok"
-      : "facebook";
+      : data.platform?.toLowerCase().includes("youtube")
+        ? "youtube"
+        : data.platform?.toLowerCase().includes("tiktok")
+          ? "tiktok"
+          : "facebook";
 
   /* ---------------- SAFE INITIALS ---------------- */
   const initials = (data.name || "U")
@@ -96,9 +96,9 @@ export default function ChatWindow({ data }) {
             <FiFacebook />
           </span>
         )}
-        {platform === "linkedin" && (
-          <span className="text-blue-600 text-xl">
-            <FiLinkedin />
+        {platform === "youtube" && (
+          <span className="text-red-500 text-xl">
+            <FiYoutube />
           </span>
         )}
         {platform === "tiktok" && (
@@ -123,16 +123,15 @@ export default function ChatWindow({ data }) {
 
             <div
               className={`max-w-[80%] px-4 py-3 rounded-2xl text-[15px]
-                ${
-                  msg.from === "assistant"
-                    ? "bg-[#AE1022] text-white rounded-br-none"
-                    : "bg-[#F1F5F9] text-[#0F172B] rounded-bl-none"
+                ${msg.from === "assistant"
+                  ? "bg-[#AE1022] text-white rounded-br-none"
+                  : "bg-[#F1F5F9] text-[#0F172B] rounded-bl-none"
                 }`}
               style={{
                 alignSelf:
                   msg.from === "assistant"
-                  ? "flex-end"
-                  : "flex-start",
+                    ? "flex-end"
+                    : "flex-start",
               }}
             >
               {msg.text}
@@ -155,7 +154,7 @@ export default function ChatWindow({ data }) {
         <div ref={bottomRef} />
       </div>
 
-      
+
     </div>
   );
 }

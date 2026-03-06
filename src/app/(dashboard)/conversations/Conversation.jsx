@@ -30,42 +30,47 @@ export default function Conversation() {
 
         const rawList = res.data?.results || [];
 
-        const normalized = rawList.map((item) => ({
-          id: item.id,
+        const normalized = rawList.map((rawItem) => {
+          // Flatten if API returns { coversation: {...} } or { conversation: {...} } instead of a flat object
+          const item = rawItem.coversation || rawItem.conversation || rawItem;
 
-          // LEFT LIST
-          name: item.client_name || item.client_external_id || "Unknown",
-          platform: item.source?.platform || "facebook",
-          lastMessage: item.last_message || "No messages yet",
-          lastMessageAt: formatLastMessageTime(item.lead?.last_response),
+          return {
+            id: item.id,
+
+            // LEFT LIST
+            name: item.client_name || item.client_external_id || "Unknown",
+            platform: item.source?.platform || "facebook",
+            lastMessage: item.last_message || "No messages yet",
+            lastMessageAt: formatLastMessageTime(item.lead?.last_response),
 
 
-          //  ADD SCORE FOR CONVERSATION LIST
-          score: item.lead?.score ?? 0,
-          unread: 0,
+            //  ADD SCORE FOR CONVERSATION LIST
+            score: item.lead?.score ?? 0,
+            unread: 0,
 
-          // placeholder
-          messages: [],
+            // placeholder
+            messages: [],
 
-          // RIGHT PANEL
-          leadDetails: {
-            leadScore: item.lead?.score ?? 0,
-            tags: [item.lead?.status || "New"],
-            contact: {
-              name: item.client_name,
-              email: "N/A",
-              phone: "N/A",
-              location: "N/A",
-              jobTitle: "N/A",
-            },
-            lastInteractions: [
-              {
-                label: "Last response",
-                time: item.lead?.last_response || "",
+            // RIGHT PANEL
+            leadDetails: {
+              leadScore: item.lead?.score ?? 0,
+              tags: [item.lead?.status || "New"],
+              contact: {
+                name: item.client_name,
+                email: "N/A",
+                phone: "N/A",
+                location: "N/A",
+                jobTitle: "N/A",
               },
-            ],
-          },
-        }));
+              lastInteractions: [
+                {
+                  label: "Last response",
+                  time: item.lead?.last_response || "",
+                },
+              ],
+            },
+          };
+        });
 
         setConversations(normalized);
 
@@ -103,17 +108,28 @@ export default function Conversation() {
 
       const apiMessages = res.data?.messages || [];
 
-      const normalizedMessages = apiMessages.map((msg) => ({
-        from: msg.sender_type === "bot" ? "assistant" : "user",
-        text:
-          msg.sender_type === "bot"
-            ? msg.message?.reply || ""
-            : msg.message?.text || "",
-        time: new Date(msg.created_at).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      }));
+      const normalizedMessages = apiMessages.map((msg) => {
+        let textContent = "";
+        if (msg.sender_type === "bot") {
+          textContent = msg.message?.reply_text || msg.message?.reply || msg.reply_text || msg.reply || (typeof msg.message === 'string' ? msg.message : "");
+        } else {
+          textContent = msg.message?.text || msg.message?.body || msg.message?.comment || msg.text || (typeof msg.message === 'string' ? msg.message : "");
+          // Fallback if it's an object without standard text fields
+          if (!textContent && msg.message && typeof msg.message === 'object') {
+            const possibleText = Object.values(msg.message).find(v => typeof v === 'string');
+            textContent = possibleText || JSON.stringify(msg.message);
+          }
+        }
+
+        return {
+          from: msg.sender_type === "bot" ? "assistant" : "user",
+          text: textContent,
+          time: new Date(msg.created_at).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        };
+      });
 
       //  UPDATE ONLY MESSAGES (DON’T DROP SCORE)
       setActiveConversation((prev) => ({
@@ -135,7 +151,7 @@ export default function Conversation() {
     );
   }
 
-  
+
 
   return (
     <div className="grid grid-cols-12 gap-1">

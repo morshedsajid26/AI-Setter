@@ -1,13 +1,14 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import { FaInstagram, FaSearch, FaTiktok } from "react-icons/fa";
-import { FiFacebook, FiInstagram, FiLinkedin } from "react-icons/fi";
+import { FiFacebook, FiInstagram, FiLinkedin, FiYoutube } from "react-icons/fi";
 
 /* -------- PLATFORM NORMALIZER -------- */
 const normalizePlatform = (platform = "") => {
-  if (platform.includes("instagram")) return "instagram";
-  if (platform.includes("linkedin")) return "linkedin";
-  if (platform.includes("tiktok")) return "tiktok";
+  const p = platform.toLowerCase();
+  if (p.includes("instagram")) return "instagram";
+  if (p.includes("youtube")) return "youtube";
+  if (p.includes("tiktok")) return "tiktok";
   return "facebook";
 };
 
@@ -40,13 +41,13 @@ export default function ConversationList({ data = [], onSelect, activeId }) {
   // };
 
   /* -------- TIME SORT (CORRECT) -------- */
-const sortedData = useMemo(() => {
-  return [...safeData].sort(
-    (a, b) =>
-      new Date(b.lastMessageAt) -
-      new Date(a.lastMessageAt)
-  );
-}, [safeData]);
+  const sortedData = useMemo(() => {
+    return [...safeData].sort(
+      (a, b) =>
+        new Date(b.lastMessageAt) -
+        new Date(a.lastMessageAt)
+    );
+  }, [safeData]);
 
 
   /* -------- FILTER -------- */
@@ -90,22 +91,21 @@ const sortedData = useMemo(() => {
         {[
           "instagram",
           "facebook",
-          // "linkedin",
+          "youtube",
           // "tiktok",
         ].map((p) => (
           <button
             key={p}
             onClick={() => setPlatformFilter(platformFilter === p ? "all" : p)}
             className={`flex items-center gap-2 border p-2.5 rounded-lg
-                ${
-                  platformFilter === p
-                    ? "bg-[#900616] text-white"
-                    : "border-black/10 text-[#0A0A0A]"
-                }`}
+                ${platformFilter === p
+                ? "bg-[#900616] text-white"
+                : "border-black/10 text-[#0A0A0A]"
+              }`}
           >
             {p === "instagram" && <FiInstagram />}
             {p === "facebook" && <FiFacebook />}
-            {p === "linkedin" && <FiLinkedin />}
+            {p === "youtube" && <FiYoutube />}
             {p === "tiktok" && <FaTiktok />}
             {p.charAt(0).toUpperCase() + p.slice(1)}
           </button>
@@ -119,10 +119,9 @@ const sortedData = useMemo(() => {
             key={item.id}
             onClick={() => onSelect?.(item)}
             className={`flex gap-3 p-4 cursor-pointer transition-all
-              ${
-                activeId === item.id
-                  ? "bg-red-50 border-l-4 border-b border-[#900616]"
-                  : "bg-white hover:bg-gray-50 border-l-4 border-b border-[#F3F3F5]"
+              ${activeId === item.id
+                ? "bg-red-50 border-l-4 border-b border-[#900616]"
+                : "bg-white hover:bg-gray-50 border-l-4 border-b border-[#F3F3F5]"
               }`}
           >
             {/* AVATAR */}
@@ -145,8 +144,8 @@ const sortedData = useMemo(() => {
                   {item.platform === "facebook" && (
                     <FiFacebook className="text-blue-600" />
                   )}
-                  {item.platform === "linkedin" && (
-                    <FiLinkedin className="text-blue-600" />
+                  {item.platform === "youtube" && (
+                    <FiYoutube className="text-red-500" />
                   )}
                   {item.platform === "tiktok" && (
                     <FaTiktok className="text-blue-600" />
@@ -165,10 +164,9 @@ const sortedData = useMemo(() => {
               <div className="flex items-center gap-3 mt-3">
                 <span
                   className={`px-4 py-1 rounded-full text-sm font-semibold
-                    ${
-                      item.score >= 80
-                        ? "bg-green-50 text-green-600"
-                        : "bg-yellow-50 text-yellow-600"
+                    ${item.score >= 80
+                      ? "bg-green-50 text-green-600"
+                      : "bg-yellow-50 text-yellow-600"
                     }`}
                 >
                   Score: {item.score}
