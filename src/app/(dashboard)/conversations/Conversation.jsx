@@ -28,7 +28,10 @@ export default function Conversation() {
           },
         });
 
-        const rawList = res.data?.results || [];
+        
+        
+        const rawList = res.data || [];
+       
 
         const normalized = rawList.map((rawItem) => {
           // Flatten if API returns { coversation: {...} } or { conversation: {...} } instead of a flat object
