@@ -26,20 +26,25 @@ const SignIn = () => {
     setLoading(true);
 
     try {
-      const res = await axiosInstance.post(`/auth/login`, {
+      const res = await axiosInstance.post(`/auth/login/`, {
         email,
         password,
       });
 
-      if (res.data.success) {
-        const { access, refresh } = res.data.data;
+      if (res.data.tokens) {
+        const { access, refresh } = res.data.tokens;
 
         //  Save tokens
         Cookies.set("accessToken", access);
         Cookies.set("refreshToken", refresh);
+        
+        // Save user info
+        if (res.data.user) {
+          Cookies.set("user", JSON.stringify(res.data.user));
+        }
 
         //  Success toast
-        toast.success("Login successful!");
+        toast.success(res.data.message || "Login successful!");
 
         //  Small delay for UX
         setTimeout(() => {
@@ -87,12 +92,7 @@ const SignIn = () => {
             inputClass="border"
           />
 
-          {/* -------- ERROR -------- */}
-          {error && (
-            <p className="text-red-500 text-sm w-full text-left">
-              {error}
-            </p>
-          )}
+          
 
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2.5">

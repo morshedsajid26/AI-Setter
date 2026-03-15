@@ -10,7 +10,7 @@ const OTP = () => {
   const router = useRouter();
   const inputs = useRef([]);
 
-  const [otp, setOtp] = useState(["", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", "",""]);
   const [loading, setLoading] = useState(false);
 
   // 🔐 email from forgot-password step
@@ -28,7 +28,7 @@ const OTP = () => {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    if (index < 4) {
+    if (index < 5) {
       inputs.current[index + 1]?.focus();
     }
   };
@@ -51,8 +51,8 @@ const OTP = () => {
 
     const otpValue = otp.join(""); // string
 
-    if (otpValue.length !== 5) {
-      toast.error("Please enter the 5 digit OTP");
+    if (otpValue.length !== 6) {
+      toast.error("Please enter the 6 digit OTP");
       return;
     }
 
@@ -65,7 +65,7 @@ const OTP = () => {
     try {
       setLoading(true);
 
-      const res = await axiosInstance.post(`/auth/verify-otp`, {
+      const res = await axiosInstance.post(`/auth/verify-otp/`, {
         email,
         otp: otpValue, // ✅ STRING OTP
       });
@@ -101,7 +101,7 @@ const OTP = () => {
 
           <p className="font-inter text-[16px] text-[#333333] mt-6">
             We sent a code to your email address. Please check your email for the
-            5 digit code.
+            6 digit code.
           </p>
 
           {/* -------- OTP INPUTS -------- */}

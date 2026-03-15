@@ -52,11 +52,14 @@ const NewPass = () => {
     try {
       setLoading(true);
 
-      const res = await axiosInstance.post(`/auth/reset-password`, {
+      const email = sessionStorage.getItem("resetEmail");
+      const res = await axiosInstance.post(`/auth/reset-password/`, {
+        email: email,
         new_password: password,
         confirm_password: confirmPassword,
       });
-
+      
+      
       if (res.data) {
         toast.success("Password reset successfully");
         sessionStorage.removeItem("resetEmail");
@@ -67,7 +70,7 @@ const NewPass = () => {
     } catch (err) {
       toast.error(
         err.response?.data?.message ||
-          "Failed to reset password. Try again."
+        "Failed to reset password. Try again."
       );
     } finally {
       setLoading(false);

@@ -28,10 +28,10 @@ export default function Conversation() {
           },
         });
 
-        
-        
+
+
         const rawList = res.data || [];
-       
+
 
         const normalized = rawList.map((rawItem) => {
           // Flatten if API returns { coversation: {...} } or { conversation: {...} } instead of a flat object
@@ -44,7 +44,25 @@ export default function Conversation() {
             name: item.client_name || item.client_external_id || "Unknown",
             platform: item.source?.platform || "facebook",
             lastMessage: item.last_message || "No messages yet",
-            lastMessageAt: formatLastMessageTime(item.lead?.last_response),
+            // Extract exact time from other properties or generate fallback
+            lastMessageTimeRaw: item.lead?.last_response
+              || item.last_message_at
+              || item.updated_at
+              || item.created_at
+              || (rawItem.messages && rawItem.messages.length > 0 ? rawItem.messages[rawItem.messages.length - 1].created_at : null)
+              || (item.messages && item.messages.length > 0 ? item.messages[item.messages.length - 1].created_at : null)
+              || new Date().toISOString(),
+
+            // Use the raw time for formatting
+            lastMessageAt: formatLastMessageTime(
+              item.lead?.last_response
+              || item.last_message_at
+              || item.updated_at
+              || item.created_at
+              || (rawItem.messages && rawItem.messages.length > 0 ? rawItem.messages[rawItem.messages.length - 1].created_at : null)
+              || (item.messages && item.messages.length > 0 ? item.messages[item.messages.length - 1].created_at : null)
+              || new Date().toISOString()
+            ),
 
 
             //  ADD SCORE FOR CONVERSATION LIST

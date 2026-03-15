@@ -42,11 +42,12 @@ export default function ConversationList({ data = [], onSelect, activeId }) {
 
   /* -------- TIME SORT (CORRECT) -------- */
   const sortedData = useMemo(() => {
-    return [...safeData].sort(
-      (a, b) =>
-        new Date(b.lastMessageAt) -
-        new Date(a.lastMessageAt)
-    );
+    return [...safeData].sort((a, b) => {
+      // Parse the raw time directly and protect against Invalid Date
+      const timeA = a.lastMessageTimeRaw ? new Date(a.lastMessageTimeRaw).getTime() : 0;
+      const timeB = b.lastMessageTimeRaw ? new Date(b.lastMessageTimeRaw).getTime() : 0;
+      return timeB - timeA;
+    });
   }, [safeData]);
 
 

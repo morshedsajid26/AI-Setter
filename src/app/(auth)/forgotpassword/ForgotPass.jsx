@@ -30,7 +30,7 @@ const handleSubmit = async (e) => {
     setLoading(true);
 
     const res = await axiosInstance.post(
-      `/auth/forgot-password`,
+      `/auth/forgot-password/`,
       { email }
     );
 
