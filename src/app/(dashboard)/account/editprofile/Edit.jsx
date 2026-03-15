@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 import { BASE_URL } from "@/src/config/api";
 import { useRouter } from "next/navigation";
 
-
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const Edit = () => {
@@ -20,8 +19,7 @@ const Edit = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
+    name: "",
     email: "",
     business_name: "",
     website: "",
@@ -33,22 +31,21 @@ const Edit = () => {
       try {
         const token = Cookies.get("accessToken");
 
-        const res = await axiosInstance.get(`/auth/profile`, {
+        const res = await axiosInstance.get(`/auth/me/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
         setFormData({
-          first_name: res.data.first_name || "",
-          last_name: res.data.last_name || "",
+          name: res.data.name !== "null" && res.data.name ? res.data.name : "",
           email: res.data.email || "",
-          business_name: res.data.business_name || "",
-          website: res.data.website || "",
+          business_name: res.data.business_name !== "null" && res.data.business_name ? res.data.business_name : "",
+          website: res.data.website !== "null" && res.data.website ? res.data.website : "",
         });
 
-        if (res.data.image) {
-          setPreview(res.data.image);
+        if (res.data.profile_image) {
+          setPreview(res.data.profile_image);
         }
       } catch (err) {
         console.error("FETCH ERROR:", err);
@@ -106,11 +103,10 @@ const Edit = () => {
 
       const payload = new FormData();
 
-      if (formData.first_name)
-        payload.append("first_name", formData.first_name);
+      if (formData.name)
+        payload.append("name", formData.name);
 
-      if (formData.last_name)
-        payload.append("last_name", formData.last_name);
+      
 
       if (formData.business_name)
         payload.append("business_name", formData.business_name);
@@ -125,10 +121,10 @@ const Edit = () => {
       }
 
       if (imageFile) {
-        payload.append("image", imageFile);
+        payload.append("profile_image", imageFile);
       }
 
-      await axiosInstance.put(`/auth/profile`, payload, {
+      await axiosInstance.patch(`/auth/me/`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -137,23 +133,19 @@ const Edit = () => {
       toast.success("Profile updated successfully");
 
       // router.refresh();
-     setTimeout(() => {
-       router.push("/account");
-        }, 600);
-      
+      setTimeout(() => {
+        router.push("/account");
+      }, 600);
     } catch (err) {
       console.error("UPDATE ERROR:", err.response?.data);
-      toast.error(
-        err.response?.data?.message || "Failed to update profile"
-      );
+      toast.error(err.response?.data?.message || "Failed to update profile");
     } finally {
       setLoading(false);
     }
   };
 
   const initials =
-    (formData.first_name?.[0] || "U") +
-    (formData.last_name?.[0] || "");
+    (formData.name?.[0] || "U") + (formData.name?.split(" ")?.[1]?.[0] || "");
 
   return (
     <div className="bg-white rounded-2xl p-6">
@@ -204,15 +196,15 @@ const Edit = () => {
         <div className="grid grid-cols-12 gap-6">
           <InputField
             type="text"
-            className="col-span-6"
+            className="col-span-12"
             inputClass="rounded-lg"
-            label="First Name"
-            name="first_name"
-            value={formData.first_name}
+            label="Name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
           />
 
-          <InputField
+          {/* <InputField
             type="text"
             className="col-span-6"
             inputClass="rounded-lg"
@@ -220,7 +212,7 @@ const Edit = () => {
             name="last_name"
             value={formData.last_name}
             onChange={handleChange}
-          />
+          /> */}
 
           <InputField
             type="email"

@@ -18,7 +18,7 @@ const Profile = () => {
       try {
         const token = Cookies.get("accessToken");
 
-        const res = await axiosInstance.get(`/auth/profile`, {
+        const res = await axiosInstance.get(`/auth/me/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -27,8 +27,8 @@ const Profile = () => {
         setProfile(res.data);
 
         // ✅ FIX: set image preview
-        if (res.data?.image) {
-          setPreview(res.data.image);
+        if (res.data?.profile_image) {
+          setPreview(res.data.profile_image);
         } else {
           setPreview(null);
         }
@@ -62,8 +62,7 @@ const Profile = () => {
 
   /* ---------------- INITIALS ---------------- */
   const initials =
-    (profile.first_name?.[0] || "U") +
-    (profile.last_name?.[0] || "");
+    (profile.name?.[0] || "U") + (profile.name?.split(" ")?.[1]?.[0] || "");
 
   return (
     <div>
@@ -92,20 +91,14 @@ const Profile = () => {
         {/* ================= FORM ================= */}
         <form className="grid grid-cols-12 gap-5 md:gap-x-10 gap-y-6">
           <InputField
-            className="col-span-6"
+            className="col-span-12"
             inputClass="rounded-lg"
             readOnly
-            value={profile.first_name || ""}
-            label="First Name"
+            value={profile.name || ""}
+            label="Name"
           />
 
-          <InputField
-            className="col-span-6"
-            inputClass="rounded-lg"
-            readOnly
-            value={profile.last_name || ""}
-            label="Last Name"
-          />
+         
 
           <InputField
             className="col-span-12"
@@ -148,14 +141,11 @@ const Profile = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-x-5">
-          <InputField
-            placeholder="email@example.com"
-            inputClass="rounded-lg"
-          />
+        <div className="">
+          
 
           <button className="bg-[#900616] mt-2 py-3 px-8 rounded-lg font-inter text-white cursor-pointer">
-            Invite
+            Add Tester
           </button>
         </div>
 
@@ -176,7 +166,7 @@ const Profile = () => {
 
             <div>
               <h3 className="font-inter text-[#0A0A0A]">
-                {profile.first_name} {profile.last_name}
+                {profile.name}
               </h3>
               <p className="text-[#717182] font-inter">
                 {profile.email}
@@ -185,7 +175,7 @@ const Profile = () => {
           </div>
 
           <span className="py-1 px-2 bg-[#900616] rounded-lg font-inter text-white">
-            Owner
+            {profile.role}
           </span>
         </div>
 
