@@ -20,15 +20,15 @@ const Topbar = () => {
       try {
         const token = Cookies.get("accessToken");
 
-        const res = await axiosInstance.get(`/auth/profile`, {
+        const res = await axiosInstance.get(`/auth/me/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
         
-        if (res.data?.image) {
-          setProfileImage(res.data.image);
+        if (res.data?.profile_image) {
+          setProfileImage(res.data.profile_image);
         }
       } catch (err) {
         toast.error("Profile fetch error", err);
