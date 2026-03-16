@@ -20,6 +20,7 @@ const Dashboard = () => {
 
   const [dashboardData, setDashboardData] = useState(null);
   const [chartData, setChartData] = useState([]);
+  const [recentConversations, setRecentConversations] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const token = Cookies.get("accessToken");
@@ -54,8 +55,26 @@ const Dashboard = () => {
       }
     };
 
+    const fetchActivities = async () => {
+      try {
+        const res = await axiosInstance.get(`/dashboard/users/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        // Sort by last_interaction descending and take top 5
+        const sorted = (res.data || []).sort((a, b) => 
+          new Date(b.last_interaction).getTime() - new Date(a.last_interaction).getTime()
+        ).slice(0, 5);
+        setRecentConversations(sorted);
+      } catch (error) {
+        console.error("Recent activities fetch error", error);
+      }
+    };
+
     fetchDashboard();
     fetchChartData();
+    fetchActivities();
   }, []);
 
   return (
@@ -141,7 +160,7 @@ const Dashboard = () => {
       
 
         <div className="bg-[#FFFFFF] rounded-lg col-span-12 p-4">
-          <RecentActivity />
+          <RecentActivity data={recentConversations} />
         </div>
         
       </div>

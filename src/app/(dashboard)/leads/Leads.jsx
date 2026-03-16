@@ -140,7 +140,7 @@ const Leads = () => {
       : Math.round(
           rows.reduce((sum, r) => sum + Number(r.score), 0) / rows.length
         );
-  const syncedCount = rows.filter((r) => r.hubspot === "synced").length;
+  const hot_lead_rate = rows.length > 0 ? (hotLeads / rows.length) * 100 : 0;
 
   /* ---------------- FILTER ---------------- */
   const filteredData = useMemo(() => {
@@ -199,22 +199,22 @@ const Leads = () => {
 
       {/* ---- CARDS ---- */}
       <div className="grid grid-cols-12 gap-6 mt-8">
-        <div className="bg-[#FFFFFF] text-black  rounded-2xl col-span-6 md:col-span-4  p-4">
+        <div className="bg-[#FFFFFF] text-black  rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Total Leads</p>
           <p className="text-2xl mt-6">{totalLeads}</p>
         </div>
-        <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-4  p-4">
+        <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Hot Leads</p>
           <p className="text-2xl mt-6">{hotLeads}</p>
         </div>
-        <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-4  p-4">
+        <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-3  p-4">
+          <p>Hot Lead Rate</p>
+          <p className="text-2xl mt-6">{hot_lead_rate.toFixed(2)}%</p>
+        </div>
+        <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Avg. score</p>
           <p className="text-2xl mt-6">{avgScore}</p>
         </div>
-        {/* <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-3  p-4">
-          <p>Synced to hubspot</p>
-          <p className="text-2xl mt-6">{syncedCount}</p>
-        </div> */}
 
         {/* ---- SEARCH + FILTER (UNCHANGED) ---- */}
         <div className="bg-[#FFFFFF] rounded-2xl col-span-12 p-4 flex flex-col
