@@ -68,10 +68,10 @@ const Dashboard = () => {
           </p>
         </div>
         <div>
-          <button className="bg-[#900616] text-white px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2 cursor-pointer">
+          {/* <button className="bg-[#900616] text-white px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2 cursor-pointer">
             <FaPlus />
             Connect Channel
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -132,46 +132,18 @@ const Dashboard = () => {
           </div> */}
         </div>
 
-        <div className="bg-[#FFFFFF] rounded-2xl  col-span-12 md:col-span-6 p-4">
+        <div className="bg-[#FFFFFF] rounded-2xl  col-span-12  p-4">
           <p className="font-inter text-[#0A0A0A]">Message Volume</p>
           <p className="font-inter text-[#717182] mt-1 mb-8"> Messages received over the last 7 days</p>
 
           <MessageVolumeChart  data={chartData} />
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-6 p-4">
-          <p className="font-inter text-[#0A0A0A]">Bookings Over Time</p>
-          <p className="font-inter text-[#717182] mt-1 mb-8"> Weekly booking trends this month</p>
+      
 
-          <WeeklyBookingBar/>
-        </div>
-
-        <div className="bg-[#FFFFFF] rounded-lg col-span-12 md:col-span-8 p-4">
+        <div className="bg-[#FFFFFF] rounded-lg col-span-12 p-4">
           <RecentActivity />
         </div>
-        <div className=" col-span-12 md:col-span-4 ">
-          <div className="bg-[#FFFFFF] rounded-lg p-6">
-
-            <ChannelConnect/>
-          </div>
-
-
-          <div className="bg-[#FFFFFF] rounded-lg mt-5 p-6">
-            <p className="font-inter text-[#0A0A0A]">
-              Quick Actions
-            </p>
-
-            <div>
-              <button className="font-inter text-[#0A0A0A] mt-7 w-full border border-gray-300 rounded-lg px-3 py-2 text-left flex items-center gap-2 cursor-pointer">
-                <SiTicktick className="w-4 h-4" />
-                Reconnect HubSpot
-              </button>
-              <button className="font-inter text-[#0A0A0A] mt-4 w-full border border-gray-300 rounded-lg px-3 py-2 text-left flex items-center gap-2 cursor-pointer">
-                <FiUsers className="w-4 h-4" />
-                Export Leads CSV
-              </button>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   );
