@@ -132,9 +132,8 @@ const Edit = () => {
 
       toast.success("Profile updated successfully");
 
-      // router.refresh();
       setTimeout(() => {
-        router.push("/account");
+        window.location.href = "/account";
       }, 600);
     } catch (err) {
       console.error("UPDATE ERROR:", err.response?.data);
