@@ -106,11 +106,11 @@ const Dashboard = () => {
 
         <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
           <div className="flex items-center justify-between">
-            <p className="font-inter text-[#0F172B] ">Bookings</p>
+            <p className="font-inter text-[#0F172B] ">Average Messages</p>
             <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-          {dashboardData?.bookings ?? 0}
+          {dashboardData?.average_messages_per_user ?? 0}
           </p>
           {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
