@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axiosInstance from "@/src/config/axios";
 import Cookies from "js-cookie";
 
@@ -15,6 +15,8 @@ export default function Conversation() {
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [wsStatus, setWsStatus] = useState("connecting"); // 'connecting' | 'connected' | 'error'
+  const socketRef = useRef(null);
 
   const token = Cookies.get("accessToken");
 
@@ -129,6 +131,105 @@ export default function Conversation() {
     }
   };
 
+  /* ---------------- REAL-TIME WEBSOCKET ---------------- */
+  useEffect(() => {
+    if (!token) return;
+
+    let retryCount = 0;
+    const maxRetries = 5;
+
+    const connectSocket = () => {
+      const cleanBaseUrl = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
+      const wsUrl = `${cleanBaseUrl.replace(/^http/, "ws")}/ws/dashboard/messages/?token=${token}`;
+      
+      console.log("🔌 Attempting WebSocket connection to:", wsUrl);
+      const socket = new WebSocket(wsUrl);
+      socketRef.current = socket;
+
+      socket.onopen = () => {
+        console.log("✅ Chat WebSocket Connected Successfully");
+        setWsStatus("connected");
+        retryCount = 0;
+      };
+
+      socket.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          console.log("📩 WebSocket Message Received:", data);
+          
+          // Format the incoming message to match our UI expectations
+          const newMessage = {
+            from: data.is_from_bot || data.sender === "bot" || data.sender === "assistant" || data.from === "bot" ? "assistant" : "user",
+            text: data.text || data.message || "",
+            time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+          };
+
+          // CRITICAL: Ignore empty packets that cause blank bubbles
+          if (!newMessage.text.trim()) return;
+
+          const targetUserId = data.user_id || data.sender_id || data.sender || data.id;
+          console.log("🔎 Target User ID:", targetUserId);
+
+          // 1. Update Active Conversation if it belongs to the currently open chat
+          setActiveConversation((prev) => {
+            if (!prev) return prev;
+            
+            const isMatch = targetUserId && String(prev.id) === String(targetUserId);
+            console.log(`🏠 Active Chat Check: ${prev.id} vs ${targetUserId} -> Match: ${isMatch}`);
+
+            if (isMatch) {
+              return {
+                ...prev,
+                messages: [...prev.messages, newMessage],
+              };
+            }
+            return prev;
+          });
+
+          // 2. Update the Sidebar Conversation List
+          setConversations((prev) => {
+            return prev.map((conv) => {
+              if (targetUserId && String(conv.id) === String(targetUserId)) {
+                return {
+                  ...conv,
+                  lastMessage: newMessage.text,
+                  lastMessageAt: newMessage.time,
+                };
+              }
+              return conv;
+            });
+          });
+
+        } catch (err) {
+          console.error("Failed to parse WebSocket message", err);
+        }
+      };
+
+      socket.onclose = () => {
+        setWsStatus("error");
+        if (retryCount < maxRetries) {
+          retryCount++;
+          setTimeout(connectSocket, 3000 * retryCount);
+        } else {
+          console.warn("Chat WebSocket reconnection stopped after max retries.");
+        }
+      };
+      
+      socket.onerror = (err) => {
+        setWsStatus("error");
+        console.error("Chat WebSocket Error", err);
+      };
+    };
+
+    connectSocket();
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
+  }, [token]); // Removed activeConversation?.id to prevent double/cycling connections
+
   if (loading) {
     return <div className="p-6 bg-white">Loading...</div>;
   }
@@ -149,11 +250,14 @@ export default function Conversation() {
           data={conversations}
           activeId={activeConversation?.id}
           onSelect={handleSelectConversation}
+          wsStatus={wsStatus}
         />
       </div>
 
       <div className="col-span-9 bg-white flex flex-col min-h-0">
-        <ChatWindow data={activeConversation} />
+        <ChatWindow 
+          data={activeConversation}
+        />
       </div>
     </div>
   );

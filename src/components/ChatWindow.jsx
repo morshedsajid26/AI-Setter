@@ -5,43 +5,14 @@ import { FiFacebook, FiLinkedin, FiSend, FiYoutube } from "react-icons/fi";
 export default function ChatWindow({ data }) {
   const scrollRef = useRef(null);
 
-  /* ---------------- SAFE INITIAL MESSAGES ---------------- */
-  const buildInitialMessages = (conversation) => {
-    if (!conversation) return [];
-
-    if (Array.isArray(conversation.messages)) {
-      return conversation.messages;
-    }
-
-    // fallback: backend only has lastMessage
-    if (conversation.lastMessage) {
-      return [
-        {
-          from: "assistant",
-          text: conversation.lastMessage,
-          time: "now",
-        },
-      ];
-    }
-
-    return [];
-  };
-
-  const [messages, setMessages] = useState(
-    buildInitialMessages(data)
-  );
-
-  /* ---------------- RELOAD WHEN CONVERSATION CHANGES ---------------- */
-  useEffect(() => {
-    setMessages(buildInitialMessages(data));
-  }, [data]);
+  const messages = Array.isArray(data.messages) ? data.messages : [];
 
   /* ---------------- AUTO SCROLL ---------------- */
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages.length]); // Scroll when message count changes
 
   if (!data) {
     return (

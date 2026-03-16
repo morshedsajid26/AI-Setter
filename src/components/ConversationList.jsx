@@ -12,7 +12,7 @@ const normalizePlatform = (platform = "") => {
   return "facebook";
 };
 
-export default function ConversationList({ data = [], onSelect, activeId }) {
+export default function ConversationList({ data = [], onSelect, activeId, wsStatus }) {
   const [platformFilter, setPlatformFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -74,9 +74,20 @@ export default function ConversationList({ data = [], onSelect, activeId }) {
 
   return (
     <div className="font-inter flex flex-col h-full">
-      <h1 className="capitalize font-inter text-[#000000] text-2xl px-2 py-3">
-        Conversations
-      </h1>
+      <div className="flex items-center justify-between px-2 py-3">
+        <h1 className="capitalize font-inter text-[#000000] text-2xl">
+          Conversations
+        </h1>
+        {/* <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-100 shadow-sm" title={`Live Sync: ${wsStatus}`}>
+          <div className={`w-2.5 h-2.5 rounded-full ${
+            wsStatus === 'connected' ? 'bg-green-500' :
+            wsStatus === 'connecting' ? 'bg-yellow-400 animate-pulse' : 'bg-red-500'
+          }`} />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+            {wsStatus === 'connected' ? 'Live' : wsStatus === 'connecting' ? 'Connecting' : 'Disconnected'}
+          </span>
+        </div> */}
+      </div>
       {/* SEARCH */}
       <div className="mt-3 relative">
         <input

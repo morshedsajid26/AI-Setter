@@ -4,7 +4,7 @@ import Notification from './Notification'
 const page = () => {
   return (
     <div>
-        <Notification/>
+        {/* <Notification/> */}
     </div>
   )
 }
