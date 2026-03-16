@@ -73,8 +73,8 @@ export default function ConversationList({ data = [], onSelect, activeId }) {
   }, [platformFilter, searchTerm, sortedData]);
 
   return (
-    <div className="font-inter ">
-      <h1 className="capitalize font-inter text-[#000000] text-2xl  px-2 py-3">
+    <div className="font-inter flex flex-col h-full">
+      <h1 className="capitalize font-inter text-[#000000] text-2xl px-2 py-3">
         Conversations
       </h1>
       {/* SEARCH */}
@@ -114,7 +114,7 @@ export default function ConversationList({ data = [], onSelect, activeId }) {
       </div>
 
       {/* LIST */}
-      <div className="overflow-scroll hide-scrollbar max-h-[66vh]">
+      <div className="flex-1 overflow-y-auto hide-scrollbar">
         {filteredData.map((item) => (
           <div
             key={item.id}

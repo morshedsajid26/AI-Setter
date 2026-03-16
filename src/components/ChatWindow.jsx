@@ -1,10 +1,9 @@
-"use client";
 import React, { useRef, useEffect, useState } from "react";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
 import { FiFacebook, FiLinkedin, FiSend, FiYoutube } from "react-icons/fi";
 
 export default function ChatWindow({ data }) {
-  const bottomRef = useRef(null);
+  const scrollRef = useRef(null);
 
   /* ---------------- SAFE INITIAL MESSAGES ---------------- */
   const buildInitialMessages = (conversation) => {
@@ -39,7 +38,9 @@ export default function ChatWindow({ data }) {
 
   /* ---------------- AUTO SCROLL ---------------- */
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [messages]);
 
   if (!data) {
@@ -68,9 +69,9 @@ export default function ChatWindow({ data }) {
     .join("");
 
   return (
-    <div className="flex flex-col justify-between bg-white font-inter h-full overflow-scroll hide-scrollbar">
+    <div className="flex flex-col justify-between bg-white font-inter h-full">
       {/* ---------------- HEADER ---------------- */}
-      <div className="p-4 bg-white flex items-center gap-3 ">
+      <div className="p-4 bg-white flex items-center gap-3 shrink-0">
         <div className="w-10 h-10 bg-[#900616] text-white rounded-full flex items-center justify-center font-semibold capitalize">
           {initials}
         </div>
@@ -106,12 +107,16 @@ export default function ChatWindow({ data }) {
             <FaTiktok />
           </span>
         )}
+
+        <div>
+          <span className="bg-[#900616] text-sm text-white px-2 py-1 rounded-full">Lead Score: {data.score}</span>
+        </div>
       </div>
 
       {/* ------------ MESSAGE AREA ------------ */}
-      <div
-        className="flex-1 overflow-y-auto p-5 space-y-2 hide-scrollbar "
-        style={{ maxHeight: "calc(80vh )" }}
+      <div 
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-5 space-y-2 hide-scrollbar min-h-0"
       >
         {messages.map((msg, idx) => (
           <div key={idx} className="flex flex-col">
@@ -150,11 +155,7 @@ export default function ChatWindow({ data }) {
             </p>
           </div>
         ))}
-
-        <div ref={bottomRef} />
       </div>
-
-
     </div>
   );
 }

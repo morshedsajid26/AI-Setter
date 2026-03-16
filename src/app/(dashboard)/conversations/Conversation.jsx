@@ -22,62 +22,42 @@ export default function Conversation() {
   useEffect(() => {
     const fetchConversations = async () => {
       try {
-        const res = await axiosInstance.get(`/conversation`, {
+        const res = await axiosInstance.get(`${BASE_URL}/dashboard/users/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-
-
         const rawList = res.data || [];
 
-
-        const normalized = rawList.map((rawItem) => {
-          // Flatten if API returns { coversation: {...} } or { conversation: {...} } instead of a flat object
-          const item = rawItem.coversation || rawItem.conversation || rawItem;
+        const normalized = rawList.map((item) => {
+          const rawMessages = item.messages || [];
+          
+          // Map and reverse messages so oldest is first (top) and newest is last (bottom)
+          const normalizedMessages = [...rawMessages].map((msg) => ({
+            from: msg.is_from_bot ? "assistant" : "user",
+            text: msg.text || "",
+            time: msg.timestamp_display || new Date(msg.timestamp).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          })).reverse();
 
           return {
             id: item.id,
-
-            // LEFT LIST
-            name: item.client_name || item.client_external_id || "Unknown",
-            platform: item.source?.platform || "facebook",
-            lastMessage: item.last_message || "No messages yet",
-            // Extract exact time from other properties or generate fallback
-            lastMessageTimeRaw: item.lead?.last_response
-              || item.last_message_at
-              || item.updated_at
-              || item.created_at
-              || (rawItem.messages && rawItem.messages.length > 0 ? rawItem.messages[rawItem.messages.length - 1].created_at : null)
-              || (item.messages && item.messages.length > 0 ? item.messages[item.messages.length - 1].created_at : null)
-              || new Date().toISOString(),
-
-            // Use the raw time for formatting
-            lastMessageAt: formatLastMessageTime(
-              item.lead?.last_response
-              || item.last_message_at
-              || item.updated_at
-              || item.created_at
-              || (rawItem.messages && rawItem.messages.length > 0 ? rawItem.messages[rawItem.messages.length - 1].created_at : null)
-              || (item.messages && item.messages.length > 0 ? item.messages[item.messages.length - 1].created_at : null)
-              || new Date().toISOString()
-            ),
-
-
-            //  ADD SCORE FOR CONVERSATION LIST
-            score: item.lead?.score ?? 0,
+            name: item.name || item.display_name || "Unknown",
+            platform: item.platform || "facebook",
+            lastMessage: rawMessages.length > 0 ? rawMessages[0].text : "No messages yet",
+            lastMessageTimeRaw: item.last_interaction || new Date().toISOString(),
+            lastMessageAt: item.last_interaction_display || formatLastMessageTime(item.last_interaction || new Date().toISOString()),
+            score: item.score ?? 0,
             unread: 0,
-
-            // placeholder
-            messages: [],
-
-            // RIGHT PANEL
+            messages: normalizedMessages,
             leadDetails: {
-              leadScore: item.lead?.score ?? 0,
-              tags: [item.lead?.status || "New"],
+              leadScore: item.score ?? 0,
+              tags: [item.status_display || "New"],
               contact: {
-                name: item.client_name,
+                name: item.name || item.display_name,
                 email: "N/A",
                 phone: "N/A",
                 location: "N/A",
@@ -86,7 +66,7 @@ export default function Conversation() {
               lastInteractions: [
                 {
                   label: "Last response",
-                  time: item.lead?.last_response || "",
+                  time: item.last_interaction_display || "",
                 },
               ],
             },
@@ -111,48 +91,35 @@ export default function Conversation() {
   /* ---------------- FETCH SINGLE CONVERSATION ---------------- */
   const handleSelectConversation = async (conversation) => {
     try {
-      //  PRESERVE SCORE + LEAD DETAILS
+      // Clear messages temporarily while loading new ones, preserve other UI details
       setActiveConversation({
         ...conversation,
-        score: conversation.score ?? 0,
         messages: [],
       });
 
       const res = await axiosInstance.get(
-        `/conversation/${conversation.id}`,
+        `${BASE_URL}/dashboard/users/${conversation.id}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
 
-      const apiMessages = res.data?.messages || [];
+      // The new API response is an array containing the single user object
+      const item = Array.isArray(res.data) && res.data.length > 0 ? res.data[0] : (res.data || {});
+      const rawMessages = item.messages || [];
 
-      const normalizedMessages = apiMessages.map((msg) => {
-        let textContent = "";
-        if (msg.sender_type === "bot") {
-          textContent = msg.message?.reply_text || msg.message?.reply || msg.reply_text || msg.reply || (typeof msg.message === 'string' ? msg.message : "");
-        } else {
-          textContent = msg.message?.text || msg.message?.body || msg.message?.comment || msg.text || (typeof msg.message === 'string' ? msg.message : "");
-          // Fallback if it's an object without standard text fields
-          if (!textContent && msg.message && typeof msg.message === 'object') {
-            const possibleText = Object.values(msg.message).find(v => typeof v === 'string');
-            textContent = possibleText || JSON.stringify(msg.message);
-          }
-        }
+      // Map and reverse messages so oldest is first (top) and newest is last (bottom)
+      const normalizedMessages = [...rawMessages].map((msg) => ({
+        from: msg.is_from_bot ? "assistant" : "user",
+        text: msg.text || "",
+        time: msg.timestamp_display || new Date(msg.timestamp).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      })).reverse();
 
-        return {
-          from: msg.sender_type === "bot" ? "assistant" : "user",
-          text: textContent,
-          time: new Date(msg.created_at).toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-        };
-      });
-
-      //  UPDATE ONLY MESSAGES (DON’T DROP SCORE)
       setActiveConversation((prev) => ({
         ...prev,
         messages: normalizedMessages,
@@ -175,8 +142,8 @@ export default function Conversation() {
 
 
   return (
-    <div className="grid grid-cols-12 gap-1">
-      <div className="col-span-3 bg-white p-2">
+    <div className="grid grid-cols-12 gap-1 h-[calc(100vh-90px)] mb-4 overflow-hidden">
+      <div className="col-span-3 bg-white p-2 flex flex-col min-h-0">
         {/* <Bredcumb /> */}
         <ConversationList
           data={conversations}
@@ -185,12 +152,8 @@ export default function Conversation() {
         />
       </div>
 
-      <div className="col-span-6 bg-white">
+      <div className="col-span-9 bg-white flex flex-col min-h-0">
         <ChatWindow data={activeConversation} />
-      </div>
-
-      <div className="col-span-3 bg-white">
-        <ActiveLeads data={activeConversation?.leadDetails} />
       </div>
     </div>
   );
