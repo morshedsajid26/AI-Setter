@@ -106,36 +106,30 @@ const Leads = () => {
       const token = Cookies.get("accessToken");
 
       const res = await axiosInstance.get(
-        `/conversation?page=1&size=10`,
+        `/api/leads/`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      const mapped = res.data.results.map((item) => {
-        const score = item.lead?.score ?? 0;
+      const mapped = (res.data || []).map((item) => {
+        const score = item.score ?? 0;
 
         return {
-          name: item.client_name || item.client_external_id || "Unknown",
-          username: item.client_external_id,
-          platform: item.source?.platform?.includes("facebook")
-            ? "facebook"
-            : item.source?.platform?.includes("instagram")
-            ? "instagram"
-            : "youtube",
+          id: item.id,
+          name: item.display_name || "Unknown",
+          platform: item.platform || "facebook",
           score,
-          status:
-            score >= 80
-              ? "hot"
-              : score >= 60
-              ? "warm"
-              : score >= 40
-              ? "cold"
-              : "nurture",
-          source: item.source?.platform,
-          last_contact: item.lead?.last_response
-            ? new Date(item.lead.last_response).toLocaleDateString()
-            : "-",
+          status: (item.status_display || "").toLowerCase().includes("hot")
+            ? "hot"
+            : (item.status_display || "").toLowerCase().includes("warm")
+            ? "warm"
+            : (item.status_display || "").toLowerCase().includes("cold")
+            ? "cold"
+            : "nurture",
+          status_display: item.status_display || "Cold Lead",
+          source: item.platform,
+          last_contact: item.last_interaction_display || "-",
           hubspot: "not synced",
         };
       });
@@ -169,8 +163,7 @@ const Leads = () => {
       const t = searchTerm.toLowerCase();
       result = result.filter(
         (r) =>
-          r.name.toLowerCase().includes(t) ||
-          r.username.toLowerCase().includes(t)
+          (r.name || "").toLowerCase().includes(t)
       );
     }
 
@@ -207,9 +200,9 @@ const Leads = () => {
           <button onClick={handleExportCSV} className="bg-[#FFFFFF] text-[#0F172B] px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2">
             <BiExport className="w-6 h-6" /> Export CSV
           </button>
-          <button className="bg-[#900616] text-white px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2">
+          {/* <button className="bg-[#900616] text-white px-4 py-2 rounded-lg font-inter font-medium flex items-center gap-2">
             <AiOutlineExport className="h-6 w-6" /> Sync to HubSpot
-          </button>
+          </button> */}
         </div>
       </div>
 

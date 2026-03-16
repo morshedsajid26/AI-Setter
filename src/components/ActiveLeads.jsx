@@ -27,7 +27,7 @@ export default function ActiveLeads({ data }) {
         <p className="text-sm font-medium text-[#0F172A]">Lead Score</p>
         <div className="flex items-center gap-3 mt-2">
           <span className="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full">
-            {data.leadScore}/100
+            {data.score || 0}/100
           </span>
         </div>
 
@@ -35,7 +35,7 @@ export default function ActiveLeads({ data }) {
         <div className="w-full h-2 bg-gray-200 rounded-full mt-2">
           <div
             className="h-2 bg-[#900616] rounded-full"
-            style={{ width: `${data.leadScore}%` }}
+            style={{ width: `${data.score || 0}%` }}
           ></div>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default function ActiveLeads({ data }) {
         <p className="text-sm font-medium text-[#0F172A] mb-2">Tags</p>
 
         <div className="flex gap-2 flex-wrap">
-          {data.tags.map((tag, idx) => (
+          {(data.tags || [data.status_display || "New"]).map((tag, idx) => (
             <span
               key={idx}
               className="px-3 py-1 border rounded-full text-sm bg-[#F8FAFC] text-[#0F172A]"
@@ -68,27 +68,27 @@ export default function ActiveLeads({ data }) {
         <div className="space-y-2 text-[#334155]">
           <div className="flex items-center gap-2">
             <FaUser className="text-[#64748B]" />
-            <span>{data.contact.name}</span>
+            <span>{data.name || data.display_name}</span>
           </div>
 
           <div className="flex items-center gap-2">
             <FiMail className="text-[#64748B]" />
-            <span>{data.contact.email}</span>
+            <span>{data.contact?.email || "N/A"}</span>
           </div>
 
           <div className="flex items-center gap-2">
             <FiPhone className="text-[#64748B]" />
-            <span>{data.contact.phone}</span>
+            <span>{data.contact?.phone || "N/A"}</span>
           </div>
 
           <div className="flex items-center gap-2">
             <FiMapPin className="text-[#64748B]" />
-            <span>{data.contact.location}</span>
+            <span>{data.contact?.location || "N/A"}</span>
           </div>
 
           <div className="flex items-center gap-2">
             <FiBriefcase className="text-[#64748B]" />
-            <span>{data.contact.jobTitle}</span>
+            <span>{data.contact?.jobTitle || "N/A"}</span>
           </div>
         </div>
       </div>
@@ -110,7 +110,9 @@ export default function ActiveLeads({ data }) {
         </p>
 
         <div className="space-y-3">
-          {data.lastInteractions.map((item, i) => (
+          {(data.lastInteractions || [
+            { label: "Last Interaction", time: data.last_interaction_display || data.last_contact }
+          ]).map((item, i) => (
             <div
               key={i}
               className="p-3 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0]"
