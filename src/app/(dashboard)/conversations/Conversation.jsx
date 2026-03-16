@@ -27,6 +27,33 @@ const getSenderType = (msg) => {
   return isBot ? "assistant" : "user";
 };
 
+/* -------- BADGE COMPONENT -------- */
+const Badge = ({ children, color }) => {
+  const palette = {
+    cold: "bg-[#F1F5F9] text-[#314158]",
+    nurture: "bg-[#DBEAFE] text-[#1447E6]",
+    hot: "bg-[#FFE2E2] text-[#C10007]",
+    warm: "bg-[#FEF3C6] text-[#BB4D00]",
+    synced: "bg-[#D1FAE5] text-[#047857]",
+  };
+
+  return (
+    <span className={`inline-flex items-center rounded-full px-3 py-1 text-[12px] font-inter ${palette[color] || palette.cold}`}>
+      {children}
+    </span>
+  );
+};
+
+/* -------- STATUS MAPPER -------- */
+const renderStatusBadge = (statusText) => {
+  const s = (statusText || "").toLowerCase();
+  if (s.includes("hot")) return <Badge color="hot">Hot Lead</Badge>;
+  if (s.includes("warm")) return <Badge color="warm">Warm Lead</Badge>;
+  if (s.includes("nurture")) return <Badge color="nurture">Nurture</Badge>;
+  if (s.includes("cold")) return <Badge color="cold">Cold Lead</Badge>;
+  return <Badge color="cold">{statusText || "New"}</Badge>;
+};
+
 export default function Conversation() {
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
@@ -65,10 +92,12 @@ export default function Conversation() {
             id: item.id,
             name: item.name || item.display_name || "Unknown",
             platform: item.platform || "facebook",
+            profile_pic: item.profile_pic || null,
             lastMessage: rawMessages.length > 0 ? rawMessages[0].text : "No messages yet",
             lastMessageTimeRaw: item.last_interaction || new Date().toISOString(),
             lastMessageAt: item.last_interaction_display || formatLastMessageTime(item.last_interaction || new Date().toISOString()),
             score: item.score ?? 0,
+            status_display: renderStatusBadge(item.status_display),
             unread: 0,
             messages: normalizedMessages,
             leadDetails: {
@@ -238,6 +267,10 @@ export default function Conversation() {
                   ...conv,
                   lastMessage: newMessage.text,
                   lastMessageAt: newMessage.time,
+                  score: data.score ?? data.data?.score ?? conv.score,
+                  status_display: data.status_display 
+                    ? renderStatusBadge(data.status_display) 
+                    : (data.data?.status_display ? renderStatusBadge(data.data.status_display) : conv.status_display),
                 };
               }
               return conv;
@@ -283,8 +316,6 @@ export default function Conversation() {
       <div className="p-6 bg-white text-gray-500">No conversations found</div>
     );
   }
-
-
 
   return (
     <div className="grid grid-cols-12 gap-1 h-[calc(100vh-90px)] mb-4 overflow-hidden">

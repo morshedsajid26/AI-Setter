@@ -57,17 +57,13 @@ const Leads = () => {
     return <Badge color="cold">{status}</Badge>;
   }
 
-  function HubSpotCell(hubspot) {
-    if (hubspot === "synced") return <Badge color="synced">Synced</Badge>;
-    return <Badge color="not_synced">Not Synced</Badge>;
-  }
 
   /* ---------------- TABLE HEADS (UNCHANGED) ---------------- */
   const TableHeads = [
     {
       Title: "Name",
       key: "name",
-      width: "14%",
+      width: "25%",
       render: (row) => (
         <div className="flex flex-col items-start text-left">
           <span className="font-inter text-[#0F172B] text-base">{row.name}</span>
@@ -80,24 +76,19 @@ const Leads = () => {
     {
       Title: "Platform",
       key: "platform",
-      width: "10%",
+      width: "15%",
       render: (row) => PlatformCell(row.platform),
     },
-    { Title: "Score", key: "score", width: "10%" },
+    { Title: "Score", key: "score", width: "15%" },
     {
       Title: "Status",
       key: "status",
-      width: "10%",
+      width: "15%",
       render: (row) => StatusCell(row.status),
     },
-    { Title: "Source", key: "source", width: "10%" },
-    { Title: "Last Contact", key: "last_contact", width: "10%" },
-    {
-      Title: "Hubspot",
-      key: "hubspot",
-      width: "10%",
-      render: (row) => HubSpotCell(row.hubspot),
-    },
+    { Title: "Source", key: "source", width: "15%" },
+    { Title: "Last Contact", key: "last_contact", width: "15%" },
+    
   ];
 
   /* ---------------- FETCH API ---------------- */
@@ -130,7 +121,7 @@ const Leads = () => {
           status_display: item.status_display || "Cold Lead",
           source: item.platform,
           last_contact: item.last_interaction_display || "-",
-          hubspot: "not synced",
+          
         };
       });
 
@@ -208,22 +199,22 @@ const Leads = () => {
 
       {/* ---- CARDS ---- */}
       <div className="grid grid-cols-12 gap-6 mt-8">
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
+        <div className="bg-[#FFFFFF] text-black  rounded-2xl col-span-6 md:col-span-4  p-4">
           <p>Total Leads</p>
           <p className="text-2xl mt-6">{totalLeads}</p>
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
+        <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-4  p-4">
           <p>Hot Leads</p>
           <p className="text-2xl mt-6">{hotLeads}</p>
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
+        <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-4  p-4">
           <p>Avg. score</p>
           <p className="text-2xl mt-6">{avgScore}</p>
         </div>
-        <div className="bg-[#FFFFFF] rounded-2xl col-span-6 md:col-span-3  p-4">
+        {/* <div className="bg-[#FFFFFF] text-black rounded-2xl col-span-6 md:col-span-3  p-4">
           <p>Synced to hubspot</p>
           <p className="text-2xl mt-6">{syncedCount}</p>
-        </div>
+        </div> */}
 
         {/* ---- SEARCH + FILTER (UNCHANGED) ---- */}
         <div className="bg-[#FFFFFF] rounded-2xl col-span-12 p-4 flex flex-col
@@ -231,10 +222,10 @@ const Leads = () => {
           <div className="relative md:w-[50%] w-full">
             <input
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full py-2.5 pl-10 pr-3 bg-[#F3F3F5] rounded-lg outline-none"
+              className="w-full py-2.5 pl-10 pr-3 bg-[#F3F3F5] text-black placeholder:text-black/50 rounded-lg outline-none"
               placeholder="Search conversations..."
             />
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2" />
+            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-black" />
           </div>
 
           <div className="flex gap-5 md:w-[50%] justify-end">
@@ -242,7 +233,7 @@ const Leads = () => {
               <button
                 key={s}
                 onClick={() => setStatusFilter(s)}
-                className={`px-4 py-2 border rounded-lg ${
+                className={`px-4 py-2 border rounded-lg text-black ${
                   statusFilter === s
                     ? "bg-black text-white"
                     : "border-black/10"

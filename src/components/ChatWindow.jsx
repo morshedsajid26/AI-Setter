@@ -44,18 +44,27 @@ export default function ChatWindow({ data }) {
       {/* ---------------- HEADER ---------------- */}
       <div className="p-4 bg-white flex items-center gap-3 shrink-0">
         <div className="w-10 h-10 bg-[#900616] text-white rounded-full flex items-center justify-center font-semibold capitalize">
-          {initials}
+          {data.profile_pic ? (
+                  <img src={data.profile_pic} alt="Profile" className="w-full h-full object-cover rounded-full" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center font-semibold capitalize">
+                    {(data.name || "U")
+                .split(" ")
+                .map((w) => w[0])
+                .join("")}
+                  </div>
+                )}
         </div>
 
         <div>
           <h2 className="font-semibold text-[16px] text-[#0F172B]">
             {data.name || "Unknown"}
           </h2>
-          {data.username && (
+         
             <p className="text-sm text-[#94A3B8]">
-              @{data.username}
+             Lead Score: {data.score}
             </p>
-          )}
+        
         </div>
 
         {platform === "instagram" && (
@@ -80,7 +89,7 @@ export default function ChatWindow({ data }) {
         )}
 
         <div>
-          <span className="bg-[#900616] text-sm text-white px-2 py-1 rounded-full">Lead Score: {data.score}</span>
+          <span className="">{data.status_display}</span>
         </div>
       </div>
 

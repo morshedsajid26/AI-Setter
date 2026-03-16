@@ -138,10 +138,16 @@ export default function ConversationList({ data = [], onSelect, activeId, wsStat
           >
             {/* AVATAR */}
             <div className="w-12 h-12 bg-[#BE0016] text-white rounded-full flex items-center justify-center font-semibold capitalize">
-              {(item.name || "U")
+                {item.profile_pic ? (
+                  <img src={item.profile_pic} alt="Profile" className="w-full h-full object-cover rounded-full" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center font-semibold capitalize">
+                    {(item.name || "U")
                 .split(" ")
                 .map((w) => w[0])
                 .join("")}
+                  </div>
+                )}
             </div>
 
             {/* DETAILS */}
