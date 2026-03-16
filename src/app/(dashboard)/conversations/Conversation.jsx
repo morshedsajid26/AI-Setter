@@ -11,6 +11,22 @@ import ActiveLeads from "@/src/components/ActiveLeads";
 import { BASE_URL } from "@/src/config/api";
 import { formatLastMessageTime } from "@/src/utils/formatLastMessageTime";
 
+// Helper to robustly identify if a message is from the bot/AI
+const getSenderType = (msg) => {
+  if (!msg) return "user";
+  const isBot = 
+    msg.is_from_bot === true || 
+    msg.is_from_bot === "true" || 
+    msg.is_from_bot === 1 ||
+    msg.sender === "bot" || 
+    msg.sender === "assistant" || 
+    msg.from === "bot" || 
+    msg.is_bot === true ||
+    (msg.text && (msg.text.includes("AI Assistant") || msg.text.includes("bot_pending")));
+
+  return isBot ? "assistant" : "user";
+};
+
 export default function Conversation() {
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
@@ -37,7 +53,7 @@ export default function Conversation() {
           
           // Map and reverse messages so oldest is first (top) and newest is last (bottom)
           const normalizedMessages = [...rawMessages].map((msg) => ({
-            from: msg.is_from_bot ? "assistant" : "user",
+            from: getSenderType(msg),
             text: msg.text || "",
             time: msg.timestamp_display || new Date(msg.timestamp).toLocaleTimeString([], {
               hour: "2-digit",
@@ -114,7 +130,7 @@ export default function Conversation() {
 
       // Map and reverse messages so oldest is first (top) and newest is last (bottom)
       const normalizedMessages = [...rawMessages].map((msg) => ({
-        from: msg.is_from_bot ? "assistant" : "user",
+        from: getSenderType(msg),
         text: msg.text || "",
         time: msg.timestamp_display || new Date(msg.timestamp).toLocaleTimeString([], {
           hour: "2-digit",
@@ -140,7 +156,7 @@ export default function Conversation() {
 
     const connectSocket = () => {
       const cleanBaseUrl = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
-      const wsUrl = `${cleanBaseUrl.replace(/^http/, "ws")}/ws/dashboard/messages/?token=${token}`;
+      const wsUrl = `${cleanBaseUrl.replace(/^http/, "ws")}/ws/dashboard/messages/?token=${token}&ngrok-skip-browser-warning=1`;
       
       console.log("🔌 Attempting WebSocket connection to:", wsUrl);
       const socket = new WebSocket(wsUrl);
@@ -154,18 +170,46 @@ export default function Conversation() {
 
       socket.onmessage = (event) => {
         try {
+          if (!event.data) return;
+
           const data = JSON.parse(event.data);
+          if (!data) return;
           console.log("📩 WebSocket Message Received:", data);
           
-          // Format the incoming message to match our UI expectations
+          // 1. EXTRACT TEXT: Only from known content fields
+          // We avoid using the entire 'data' object as a fallback to prevent JSON bubbles
+          let extractedText = "";
+          
+          if (typeof data.text === "string") {
+            extractedText = data.text;
+          } else if (typeof data.message === "string") {
+            extractedText = data.message;
+          } else if (typeof data.content === "string") {
+            extractedText = data.content;
+          } else if (data.message && typeof data.message.text === "string") {
+            // Handle nested Django structures like data.message.text
+            extractedText = data.message.text;
+          } else if (data.data && typeof data.data.text === "string") {
+            extractedText = data.data.text;
+          }
+
+          // 2. FORMAT MESSAGE: Only if we actually found text
+          if (!extractedText || !extractedText.trim()) {
+            console.log("📩 Skipping non-message packet (likely metadata or ACK)");
+            return;
+          }
+
+          // 3. IDENTIFY SENDER: Use consistent robust check
+          const from = getSenderType(data) === "assistant" || getSenderType(data.message) === "assistant" || getSenderType(data.data) === "assistant" 
+            ? "assistant" : "user";
+          
+          console.log(`🔎 ID: ${data.id || data.message_id} | Result: ${from} | Raw is_from_bot: ${data.is_from_bot}`);
+
           const newMessage = {
-            from: data.is_from_bot || data.sender === "bot" || data.sender === "assistant" || data.from === "bot" ? "assistant" : "user",
-            text: data.text || data.message || "",
+            from: from,
+            text: extractedText,
             time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
           };
-
-          // CRITICAL: Ignore empty packets that cause blank bubbles
-          if (!newMessage.text.trim()) return;
 
           const targetUserId = data.user_id || data.sender_id || data.sender || data.id;
           console.log("🔎 Target User ID:", targetUserId);

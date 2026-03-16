@@ -21,7 +21,12 @@ export default function MessageVolumeChart({ data = [] }) {
           margin={{ top: 20, right: 20, left: 0, bottom: 0 }}
         >
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-          <XAxis dataKey="day" tick={{ fill: "#64748B" }} fontFamily="inter" />
+          <XAxis 
+            dataKey="day" 
+            tick={{ fill: "#64748B" }} 
+            fontFamily="inter" 
+            tickFormatter={(value) => value.split(' ').pop()}
+          />
           <YAxis
             tick={{ fill: "#64748B" }}
             domain={[0, "auto"]}
@@ -30,7 +35,7 @@ export default function MessageVolumeChart({ data = [] }) {
           <Tooltip />
           <Line
             type="monotone"
-            dataKey="count"
+            dataKey="total_messages"
             stroke="#900616"
             strokeWidth={3}
             dot={{ r: 5, fill: "#900616", strokeWidth: 2 }}

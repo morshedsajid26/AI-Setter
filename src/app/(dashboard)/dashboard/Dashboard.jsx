@@ -19,29 +19,44 @@ const Dashboard = () => {
 
 
   const [dashboardData, setDashboardData] = useState(null);
-const [loading, setLoading] = useState(true);
+  const [chartData, setChartData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const token = Cookies.get("accessToken");
+  const token = Cookies.get("accessToken");
 
   useEffect(() => {
-  const fetchDashboard = async () => {
-    try {
-      const res = await axiosInstance.get(`/dashboard`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const fetchDashboard = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/dashboard-summary/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      setDashboardData(res.data);
-    } catch (error) {
-      console.error("Dashboard fetch error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setDashboardData(res.data);
+      } catch (error) {
+        console.error("Dashboard fetch error", error);
+      } 
+    };
 
-  fetchDashboard();
-}, []);
+    const fetchChartData = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/dashboard-graph/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setChartData(res.data || []);
+      } catch (error) {
+        console.error("Chart data fetch error", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboard();
+    fetchChartData();
+  }, []);
 
   return (
     <div>
@@ -67,7 +82,7 @@ const token = Cookies.get("accessToken");
             <LuMessageSquare className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-            {dashboardData?.total_message ?? 0}
+            {dashboardData?.total_user_messages ?? 0}
           </p>
           {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
@@ -81,7 +96,7 @@ const token = Cookies.get("accessToken");
             <FiUsers className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-            {dashboardData?.total_leads ?? 0}
+            {dashboardData?.potential_leads ?? 0}
           </p>
           {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
@@ -95,7 +110,7 @@ const token = Cookies.get("accessToken");
             <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-          0
+          {dashboardData?.bookings ?? 0}
           </p>
           {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowUpRight className=" text-[#00A63E]" />
@@ -109,7 +124,7 @@ const token = Cookies.get("accessToken");
             <IoCalendarOutline className="w-6 h-6 text-[#0F172B]" />
           </div>
           <p className="font-inter font-medium text-[#0F172B] text-2xl mt-[42px]">
-            0
+           {dashboardData?.conversation_rate?? 0}
           </p>
           {/* <div className="flex items-center gap-1 mt-2">
             <GoArrowDownRight className=" text-[#E7000B]" />
@@ -121,7 +136,7 @@ const token = Cookies.get("accessToken");
           <p className="font-inter text-[#0A0A0A]">Message Volume</p>
           <p className="font-inter text-[#717182] mt-1 mb-8"> Messages received over the last 7 days</p>
 
-          <MessageVolumeChart  data={dashboardData?.data || []} />
+          <MessageVolumeChart  data={chartData} />
         </div>
         <div className="bg-[#FFFFFF] rounded-2xl col-span-12 md:col-span-6 p-4">
           <p className="font-inter text-[#0A0A0A]">Bookings Over Time</p>
