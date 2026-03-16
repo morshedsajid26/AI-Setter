@@ -120,7 +120,11 @@ export default function Conversation() {
           };
         });
 
-        setConversations(normalized);
+        const sorted = [...normalized].sort((a, b) => 
+          new Date(b.lastMessageTimeRaw).getTime() - new Date(a.lastMessageTimeRaw).getTime()
+        );
+
+        setConversations(sorted);
 
         if (normalized.length > 0) {
           handleSelectConversation(normalized[0]);
@@ -240,7 +244,10 @@ export default function Conversation() {
             time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
           };
 
-          const targetUserId = data.user_id || data.sender_id || data.sender || data.id;
+          const targetUserId = data.user_id || data.sender_id || data.sender || data.id || 
+                               data.message?.user_id || data.message?.sender_id || 
+                               data.data?.user_id || data.data?.sender_id ||
+                               data.recipient_id || data.receiver_id;
           console.log("🔎 Target User ID:", targetUserId);
 
           // 1. Update Active Conversation if it belongs to the currently open chat
@@ -259,22 +266,26 @@ export default function Conversation() {
             return prev;
           });
 
-          // 2. Update the Sidebar Conversation List
+          // 2. Update the Sidebar Conversation List and MOVE TO TOP
           setConversations((prev) => {
-            return prev.map((conv) => {
-              if (targetUserId && String(conv.id) === String(targetUserId)) {
-                return {
-                  ...conv,
-                  lastMessage: newMessage.text,
-                  lastMessageAt: newMessage.time,
-                  score: data.score ?? data.data?.score ?? conv.score,
-                  status_display: data.status_display 
-                    ? renderStatusBadge(data.status_display) 
-                    : (data.data?.status_display ? renderStatusBadge(data.data.status_display) : conv.status_display),
-                };
-              }
-              return conv;
-            });
+            const index = prev.findIndex((conv) => targetUserId && String(conv.id) === String(targetUserId));
+            
+            if (index !== -1) {
+              // Existing user: Update and move to top
+              const updatedConv = {
+                ...prev[index],
+                lastMessage: newMessage.text,
+                lastMessageAt: "Just now", // Temporary relative label for sidebar
+                lastMessageTimeRaw: new Date().toISOString(),
+                score: data.score ?? data.data?.score ?? prev[index].score,
+                status_display: data.status_display
+                  ? renderStatusBadge(data.status_display)
+                  : (data.data?.status_display ? renderStatusBadge(data.data.status_display) : prev[index].status_display),
+              };
+              const otherConvs = prev.filter((_, i) => i !== index);
+              return [updatedConv, ...otherConvs];
+            }
+            return prev;
           });
 
         } catch (err) {

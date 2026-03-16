@@ -46,7 +46,12 @@ export default function ConversationList({ data = [], onSelect, activeId, wsStat
       // Parse the raw time directly and protect against Invalid Date
       const timeA = a.lastMessageTimeRaw ? new Date(a.lastMessageTimeRaw).getTime() : 0;
       const timeB = b.lastMessageTimeRaw ? new Date(b.lastMessageTimeRaw).getTime() : 0;
-      return timeB - timeA;
+      
+      // Fallback if Date parsing fails (returns NaN)
+      const validA = isNaN(timeA) ? 0 : timeA;
+      const validB = isNaN(timeB) ? 0 : timeB;
+      
+      return validB - validA;
     });
   }, [safeData]);
 
@@ -171,7 +176,7 @@ export default function ConversationList({ data = [], onSelect, activeId, wsStat
                 </div>
 
                 <span className="text-sm text-gray-500">
-                  {item.lastMessageAt}
+                  {item.lastMessageAt.slice(8).split("-").reverse().join("/")} 
                 </span>
               </div>
 
