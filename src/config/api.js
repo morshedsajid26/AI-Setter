@@ -1,1 +1,1 @@
-export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://charissa-intuitable-corroboratorily.ngrok-free.dev';
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://test19.fireai.agency';
